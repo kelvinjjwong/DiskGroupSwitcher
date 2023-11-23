@@ -20,6 +20,18 @@ class ViewController: NSViewController {
         // Update the view, if already loaded.
         }
     }
+    
+    
+    override func viewWillAppear() {
+        super.viewWillAppear()
+
+        view.window?.styleMask.remove(.resizable)
+        view.window?.styleMask.remove(.miniaturizable)
+        view.window?.center()
+        
+//        let preferencesView = PreferencesView(frame: self.view.bounds)
+//        preferencesView.add(toView: self.view)
+    }
 
 
 }
