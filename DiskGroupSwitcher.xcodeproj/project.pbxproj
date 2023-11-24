@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E2DA0C12B102F1600FC44B9 /* LoggerFactory in Frameworks */ = {isa = PBXBuildFile; productRef = 8E2DA0C02B102F1600FC44B9 /* LoggerFactory */; };
 		8E4728572B0ECBAC00A265E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4728562B0ECBAC00A265E7 /* AppDelegate.swift */; };
 		8E4728592B0ECBAC00A265E7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4728582B0ECBAC00A265E7 /* ViewController.swift */; };
 		8E47285B2B0ECBAE00A265E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E47285A2B0ECBAE00A265E7 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E2DA0BE2B102D7C00FC44B9 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		8E4728532B0ECBAC00A265E7 /* DiskGroupSwitcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiskGroupSwitcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E4728562B0ECBAC00A265E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E4728582B0ECBAC00A265E7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E2DA0C12B102F1600FC44B9 /* LoggerFactory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +84,7 @@
 		8E47284A2B0ECBAC00A265E7 = {
 			isa = PBXGroup;
 			children = (
+				8E2DA0BE2B102D7C00FC44B9 /* Package.swift */,
 				8E47288C2B0FB40200A265E7 /* README.md */,
 				8E4728552B0ECBAC00A265E7 /* DiskGroupSwitcher */,
 				8E4728672B0ECBAE00A265E7 /* DiskGroupSwitcherTests */,
@@ -155,6 +159,9 @@
 			dependencies = (
 			);
 			name = DiskGroupSwitcher;
+			packageProductDependencies = (
+				8E2DA0C02B102F1600FC44B9 /* LoggerFactory */,
+			);
 			productName = DiskGroupSwitcher;
 			productReference = 8E4728532B0ECBAC00A265E7 /* DiskGroupSwitcher.app */;
 			productType = "com.apple.product-type.application";
@@ -227,6 +234,9 @@
 				Base,
 			);
 			mainGroup = 8E47284A2B0ECBAC00A265E7;
+			packageReferences = (
+				8E2DA0BF2B102F1600FC44B9 /* XCRemoteSwiftPackageReference "LoggerFactory" */,
+			);
 			productRefGroup = 8E4728542B0ECBAC00A265E7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -610,6 +620,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8E2DA0BF2B102F1600FC44B9 /* XCRemoteSwiftPackageReference "LoggerFactory" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kelvinjjwong/LoggerFactory.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8E2DA0C02B102F1600FC44B9 /* LoggerFactory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E2DA0BF2B102F1600FC44B9 /* XCRemoteSwiftPackageReference "LoggerFactory" */;
+			productName = LoggerFactory;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8E47284B2B0ECBAC00A265E7 /* Project object */;
 }
