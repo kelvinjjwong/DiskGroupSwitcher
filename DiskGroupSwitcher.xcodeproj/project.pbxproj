@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8E2DA0C12B102F1600FC44B9 /* LoggerFactory in Frameworks */ = {isa = PBXBuildFile; productRef = 8E2DA0C02B102F1600FC44B9 /* LoggerFactory */; };
+		8E2DA0C32B1058AF00FC44B9 /* DiskVolumeStackItem.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E2DA0C22B1058AF00FC44B9 /* DiskVolumeStackItem.storyboard */; };
+		8E2DA0C52B1058C500FC44B9 /* DiskVolumeStackItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2DA0C42B1058C500FC44B9 /* DiskVolumeStackItem.swift */; };
 		8E4728572B0ECBAC00A265E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4728562B0ECBAC00A265E7 /* AppDelegate.swift */; };
 		8E4728592B0ECBAC00A265E7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4728582B0ECBAC00A265E7 /* ViewController.swift */; };
 		8E47285B2B0ECBAE00A265E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E47285A2B0ECBAE00A265E7 /* Assets.xcassets */; };
@@ -38,6 +40,8 @@
 
 /* Begin PBXFileReference section */
 		8E2DA0BE2B102D7C00FC44B9 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		8E2DA0C22B1058AF00FC44B9 /* DiskVolumeStackItem.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DiskVolumeStackItem.storyboard; sourceTree = "<group>"; };
+		8E2DA0C42B1058C500FC44B9 /* DiskVolumeStackItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskVolumeStackItem.swift; sourceTree = "<group>"; };
 		8E4728532B0ECBAC00A265E7 /* DiskGroupSwitcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiskGroupSwitcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E4728562B0ECBAC00A265E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E4728582B0ECBAC00A265E7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +134,8 @@
 			children = (
 				8E4728862B0F980600A265E7 /* MainView.swift */,
 				8E4728842B0F97FA00A265E7 /* MainView.xib */,
+				8E2DA0C42B1058C500FC44B9 /* DiskVolumeStackItem.swift */,
+				8E2DA0C22B1058AF00FC44B9 /* DiskVolumeStackItem.storyboard */,
 			);
 			path = StatusBar;
 			sourceTree = "<group>";
@@ -254,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E4728852B0F97FB00A265E7 /* MainView.xib in Resources */,
+				8E2DA0C32B1058AF00FC44B9 /* DiskVolumeStackItem.storyboard in Resources */,
 				8E47285B2B0ECBAE00A265E7 /* Assets.xcassets in Resources */,
 				8E47285E2B0ECBAE00A265E7 /* Main.storyboard in Resources */,
 			);
@@ -282,6 +289,7 @@
 			files = (
 				8E4728832B0ECC5600A265E7 /* LoadableView.swift in Sources */,
 				8E4728872B0F980600A265E7 /* MainView.swift in Sources */,
+				8E2DA0C52B1058C500FC44B9 /* DiskVolumeStackItem.swift in Sources */,
 				8E4728592B0ECBAC00A265E7 /* ViewController.swift in Sources */,
 				8E4728572B0ECBAC00A265E7 /* AppDelegate.swift in Sources */,
 				8E47288B2B0FA4AA00A265E7 /* StackView.swift in Sources */,
