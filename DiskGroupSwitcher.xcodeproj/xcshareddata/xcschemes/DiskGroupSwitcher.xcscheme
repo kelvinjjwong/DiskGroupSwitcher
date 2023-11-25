@@ -29,7 +29,11 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:TestPlans/settings.xctestplan">
+            reference = "container:TestPlans/settings.xctestplan"
+            default = "YES">
+         </TestPlanReference>
+         <TestPlanReference
+            reference = "container:TestPlans/functional-test.xctestplan">
          </TestPlanReference>
       </TestPlans>
       <Testables>

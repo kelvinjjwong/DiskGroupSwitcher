@@ -9,44 +9,59 @@
         <!--Disk Volume Stack Item-->
         <scene sceneID="PEd-7d-5j0">
             <objects>
-                <viewController id="bU7-R8-ocO" customClass="DiskVolumeStackItem" customModule="DiskGroupSwitcher" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DiskVolumeStackItem" id="bU7-R8-ocO" customClass="DiskVolumeStackItem" customModule="DiskGroupSwitcher" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="tOy-S4-hL0">
                         <rect key="frame" x="0.0" y="0.0" width="274" height="51"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XHd-LA-vxh">
-                                <rect key="frame" x="211" y="18" width="58" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="offline" id="Txl-ul-upK">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sfr-el-ius">
-                                <rect key="frame" x="14" y="17" width="16" height="15"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="uwl-35-ZL7">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="onRemoveClicked:" target="bU7-R8-ocO" id="ndQ-AH-VUS"/>
-                                </connections>
-                            </button>
-                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ww9-f1-97F">
-                                <rect key="frame" x="36" y="18" width="154" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="/Volumes/ABCDEFG" id="WpJ-bn-RcW">
-                                    <font key="font" usesAppearanceFont="YES"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
+                            <box translatesAutoresizingMaskIntoConstraints="NO" id="hlY-l7-uBK">
+                                <rect key="frame" x="3" y="5" width="267" height="52"/>
+                                <view key="contentView" id="9on-Sh-cDJ">
+                                    <rect key="frame" x="4" y="5" width="259" height="32"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XHd-LA-vxh">
+                                            <rect key="frame" x="182" y="8" width="58" height="16"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="54" id="c9E-ph-t4S"/>
+                                            </constraints>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="offline" id="Txl-ul-upK">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ww9-f1-97F">
+                                            <rect key="frame" x="8" y="8" width="162" height="16"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="158" id="Rw9-Ho-SL0"/>
+                                            </constraints>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" title="/Volumes/ABCDEFG" id="WpJ-bn-RcW">
+                                                <font key="font" usesAppearanceFont="YES"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="ww9-f1-97F" firstAttribute="top" secondItem="9on-Sh-cDJ" secondAttribute="top" constant="8" id="QLn-mt-iGA"/>
+                                        <constraint firstItem="XHd-LA-vxh" firstAttribute="top" secondItem="9on-Sh-cDJ" secondAttribute="top" constant="8" id="aM8-Oa-cBk"/>
+                                        <constraint firstItem="ww9-f1-97F" firstAttribute="leading" secondItem="9on-Sh-cDJ" secondAttribute="leading" constant="10" id="fVW-hF-81X"/>
+                                        <constraint firstItem="XHd-LA-vxh" firstAttribute="leading" secondItem="ww9-f1-97F" secondAttribute="trailing" constant="16" id="ktW-MS-BGg"/>
+                                    </constraints>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="Dgm-uP-UuJ"/>
+                                </constraints>
+                            </box>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="hlY-l7-uBK" firstAttribute="top" secondItem="tOy-S4-hL0" secondAttribute="top" constant="-6" id="KFM-ss-5u6"/>
+                            <constraint firstItem="hlY-l7-uBK" firstAttribute="leading" secondItem="tOy-S4-hL0" secondAttribute="leading" constant="6" id="No1-43-rAP"/>
+                            <constraint firstAttribute="trailing" secondItem="hlY-l7-uBK" secondAttribute="trailing" constant="7" id="z9h-kx-Gxt"/>
+                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="btnRemove" destination="Sfr-el-ius" id="YPU-X8-AJb"/>
                         <outlet property="lblStatus" destination="XHd-LA-vxh" id="6cp-gb-07o"/>
                         <outlet property="lblVolume" destination="ww9-f1-97F" id="PNf-oZ-xut"/>
                     </connections>
@@ -56,7 +71,4 @@
             <point key="canvasLocation" x="-48" y="-27.5"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="NSRemoveTemplate" width="18" height="5"/>
-    </resources>
 </document>

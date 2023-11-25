@@ -10,7 +10,7 @@
 		8E2DA0C12B102F1600FC44B9 /* LoggerFactory in Frameworks */ = {isa = PBXBuildFile; productRef = 8E2DA0C02B102F1600FC44B9 /* LoggerFactory */; };
 		8E2DA0C32B1058AF00FC44B9 /* DiskVolumeStackItem.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E2DA0C22B1058AF00FC44B9 /* DiskVolumeStackItem.storyboard */; };
 		8E2DA0C52B1058C500FC44B9 /* DiskVolumeStackItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2DA0C42B1058C500FC44B9 /* DiskVolumeStackItem.swift */; };
-		8E347D4E2B11108500DA30F5 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E347D4D2B11108500DA30F5 /* Settings.swift */; };
+		8E347D4E2B11108500DA30F5 /* Servers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E347D4D2B11108500DA30F5 /* Servers.swift */; };
 		8E347D502B111CE000DA30F5 /* SwiftJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E347D4F2B111CE000DA30F5 /* SwiftJSON.swift */; };
 		8E347D522B111D2300DA30F5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E347D512B111D2300DA30F5 /* Extensions.swift */; };
 		8E347D542B111D5300DA30F5 /* SettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E347D532B111D5300DA30F5 /* SettingsTests.swift */; };
@@ -23,17 +23,11 @@
 		8E4728852B0F97FB00A265E7 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E4728842B0F97FA00A265E7 /* MainView.xib */; };
 		8E4728872B0F980600A265E7 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4728862B0F980600A265E7 /* MainView.swift */; };
 		8E47288B2B0FA4AA00A265E7 /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E47288A2B0FA4AA00A265E7 /* StackView.swift */; };
+		8EC3B2ED2B11A53000E73878 /* StackViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC3B2EC2B11A53000E73878 /* StackViewHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		8E4728652B0ECBAE00A265E7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8E47284B2B0ECBAC00A265E7 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8E4728522B0ECBAC00A265E7;
-			remoteInfo = DiskGroupSwitcher;
-		};
-		8E47286F2B0ECBAE00A265E7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8E47284B2B0ECBAC00A265E7 /* Project object */;
 			proxyType = 1;
@@ -46,7 +40,7 @@
 		8E2DA0BE2B102D7C00FC44B9 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		8E2DA0C22B1058AF00FC44B9 /* DiskVolumeStackItem.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DiskVolumeStackItem.storyboard; sourceTree = "<group>"; };
 		8E2DA0C42B1058C500FC44B9 /* DiskVolumeStackItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskVolumeStackItem.swift; sourceTree = "<group>"; };
-		8E347D4D2B11108500DA30F5 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		8E347D4D2B11108500DA30F5 /* Servers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Servers.swift; sourceTree = "<group>"; };
 		8E347D4F2B111CE000DA30F5 /* SwiftJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftJSON.swift; sourceTree = "<group>"; };
 		8E347D512B111D2300DA30F5 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		8E347D532B111D5300DA30F5 /* SettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTests.swift; sourceTree = "<group>"; };
@@ -59,13 +53,14 @@
 		8E47285F2B0ECBAE00A265E7 /* DiskGroupSwitcher.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DiskGroupSwitcher.entitlements; sourceTree = "<group>"; };
 		8E4728642B0ECBAE00A265E7 /* DiskGroupSwitcherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiskGroupSwitcherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E4728682B0ECBAE00A265E7 /* DiskGroupSwitcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskGroupSwitcherTests.swift; sourceTree = "<group>"; };
-		8E47286E2B0ECBAE00A265E7 /* DiskGroupSwitcherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiskGroupSwitcherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E4728822B0ECC5600A265E7 /* LoadableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableView.swift; sourceTree = "<group>"; };
 		8E4728842B0F97FA00A265E7 /* MainView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
 		8E4728862B0F980600A265E7 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8E4728882B0F9D4800A265E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8E47288A2B0FA4AA00A265E7 /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
 		8E47288C2B0FB40200A265E7 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		8EC3B2EB2B11679900E73878 /* functional-test.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "functional-test.xctestplan"; sourceTree = "<group>"; };
+		8EC3B2EC2B11A53000E73878 /* StackViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,13 +79,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8E47286B2B0ECBAE00A265E7 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -98,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				8E347D562B111DAE00DA30F5 /* settings.xctestplan */,
+				8EC3B2EB2B11679900E73878 /* functional-test.xctestplan */,
 			);
 			path = TestPlans;
 			sourceTree = "<group>";
@@ -119,7 +108,6 @@
 			children = (
 				8E4728532B0ECBAC00A265E7 /* DiskGroupSwitcher.app */,
 				8E4728642B0ECBAE00A265E7 /* DiskGroupSwitcherTests.xctest */,
-				8E47286E2B0ECBAE00A265E7 /* DiskGroupSwitcherUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -128,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				8E4728892B0FA0D200A265E7 /* Common */,
+				8EC3B2EA2B11652600E73878 /* Setting */,
 				8E4728812B0ECC3400A265E7 /* StatusBar */,
 				8E4728562B0ECBAC00A265E7 /* AppDelegate.swift */,
 				8E4728582B0ECBAC00A265E7 /* ViewController.swift */,
@@ -155,7 +144,7 @@
 				8E4728842B0F97FA00A265E7 /* MainView.xib */,
 				8E2DA0C42B1058C500FC44B9 /* DiskVolumeStackItem.swift */,
 				8E2DA0C22B1058AF00FC44B9 /* DiskVolumeStackItem.storyboard */,
-				8E347D4D2B11108500DA30F5 /* Settings.swift */,
+				8EC3B2EC2B11A53000E73878 /* StackViewHelper.swift */,
 			);
 			path = StatusBar;
 			sourceTree = "<group>";
@@ -169,6 +158,14 @@
 				8E347D512B111D2300DA30F5 /* Extensions.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		8EC3B2EA2B11652600E73878 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				8E347D4D2B11108500DA30F5 /* Servers.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,24 +209,6 @@
 			productReference = 8E4728642B0ECBAE00A265E7 /* DiskGroupSwitcherTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		8E47286D2B0ECBAE00A265E7 /* DiskGroupSwitcherUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8E47287E2B0ECBAE00A265E7 /* Build configuration list for PBXNativeTarget "DiskGroupSwitcherUITests" */;
-			buildPhases = (
-				8E47286A2B0ECBAE00A265E7 /* Sources */,
-				8E47286B2B0ECBAE00A265E7 /* Frameworks */,
-				8E47286C2B0ECBAE00A265E7 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8E4728702B0ECBAE00A265E7 /* PBXTargetDependency */,
-			);
-			name = DiskGroupSwitcherUITests;
-			productName = DiskGroupSwitcherUITests;
-			productReference = 8E47286E2B0ECBAE00A265E7 /* DiskGroupSwitcherUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -244,10 +223,6 @@
 						CreatedOnToolsVersion = 15.0.1;
 					};
 					8E4728632B0ECBAE00A265E7 = {
-						CreatedOnToolsVersion = 15.0.1;
-						TestTargetID = 8E4728522B0ECBAC00A265E7;
-					};
-					8E47286D2B0ECBAE00A265E7 = {
 						CreatedOnToolsVersion = 15.0.1;
 						TestTargetID = 8E4728522B0ECBAC00A265E7;
 					};
@@ -271,7 +246,6 @@
 			targets = (
 				8E4728522B0ECBAC00A265E7 /* DiskGroupSwitcher */,
 				8E4728632B0ECBAE00A265E7 /* DiskGroupSwitcherTests */,
-				8E47286D2B0ECBAE00A265E7 /* DiskGroupSwitcherUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -295,13 +269,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8E47286C2B0ECBAE00A265E7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -314,8 +281,9 @@
 				8E347D502B111CE000DA30F5 /* SwiftJSON.swift in Sources */,
 				8E4728872B0F980600A265E7 /* MainView.swift in Sources */,
 				8E2DA0C52B1058C500FC44B9 /* DiskVolumeStackItem.swift in Sources */,
+				8EC3B2ED2B11A53000E73878 /* StackViewHelper.swift in Sources */,
 				8E4728592B0ECBAC00A265E7 /* ViewController.swift in Sources */,
-				8E347D4E2B11108500DA30F5 /* Settings.swift in Sources */,
+				8E347D4E2B11108500DA30F5 /* Servers.swift in Sources */,
 				8E4728572B0ECBAC00A265E7 /* AppDelegate.swift in Sources */,
 				8E47288B2B0FA4AA00A265E7 /* StackView.swift in Sources */,
 			);
@@ -330,13 +298,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8E47286A2B0ECBAE00A265E7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -344,11 +305,6 @@
 			isa = PBXTargetDependency;
 			target = 8E4728522B0ECBAC00A265E7 /* DiskGroupSwitcher */;
 			targetProxy = 8E4728652B0ECBAE00A265E7 /* PBXContainerItemProxy */;
-		};
-		8E4728702B0ECBAE00A265E7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8E4728522B0ECBAC00A265E7 /* DiskGroupSwitcher */;
-			targetProxy = 8E47286F2B0ECBAE00A265E7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -580,40 +536,6 @@
 			};
 			name = Release;
 		};
-		8E47287F2B0ECBAE00A265E7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ZU637G36U2;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = nonamecat.DiskGroupSwitcherUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = DiskGroupSwitcher;
-			};
-			name = Debug;
-		};
-		8E4728802B0ECBAE00A265E7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ZU637G36U2;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = nonamecat.DiskGroupSwitcherUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = DiskGroupSwitcher;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -640,15 +562,6 @@
 			buildConfigurations = (
 				8E47287C2B0ECBAE00A265E7 /* Debug */,
 				8E47287D2B0ECBAE00A265E7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8E47287E2B0ECBAE00A265E7 /* Build configuration list for PBXNativeTarget "DiskGroupSwitcherUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8E47287F2B0ECBAE00A265E7 /* Debug */,
-				8E4728802B0ECBAE00A265E7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -7,8 +7,8 @@
 
 import Cocoa
 
-class CustomStackView : NSStackView {
+public class CustomStackView : NSStackView {
     
-    override var isFlipped: Bool { return true }
+    public override var isFlipped: Bool { return true }
 }
 

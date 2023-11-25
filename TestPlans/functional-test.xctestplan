@@ -1,7 +1,7 @@
 {
   "configurations" : [
     {
-      "id" : "24AEFE12-F023-4031-A944-670CF31D9BE6",
+      "id" : "91A1A367-E590-4513-809F-EE13EFCF26D9",
       "name" : "Configuration 1",
       "options" : {
 
@@ -14,9 +14,8 @@
   "testTargets" : [
     {
       "selectedTests" : [
-        "SettingsTests\/testFromJSON()",
-        "SettingsTests\/testJSON()",
-        "SettingsTests\/testToJSON()"
+        "DiskGroupSwitcherTests\/testExample()",
+        "DiskGroupSwitcherTests\/testPerformanceExample()"
       ],
       "target" : {
         "containerPath" : "container:DiskGroupSwitcher.xcodeproj",
