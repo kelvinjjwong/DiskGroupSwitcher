@@ -19,8 +19,6 @@ class MainView: NSView, LoadableView {
     @IBOutlet weak var txtHDDName: NSTextField!
     @IBOutlet weak var btnEditHDDName: NSButton!
     @IBOutlet weak var btnToggleHDD: NSSegmentedControl!
-    @IBOutlet weak var stackSSD: CustomStackView!
-    @IBOutlet weak var stackHDD: CustomStackView!
     @IBOutlet weak var txtSSDVolumeName: NSTextField!
     @IBOutlet weak var btnAddSSDVolume: NSButton!
     @IBOutlet weak var txtHDDVolumeName: NSTextField!
@@ -29,8 +27,6 @@ class MainView: NSView, LoadableView {
     @IBOutlet weak var btnRemoveHDDVolume: NSButton!
     
     private var servers:[Server] = []
-    private var ssdStackHelper:StackViewHelper<Disk, DiskVolumeStackItem>!
-    private var hddStackHelper:StackViewHelper<Disk, DiskVolumeStackItem>!
     
     // MARK: - Init
     
@@ -38,8 +34,6 @@ class MainView: NSView, LoadableView {
         super.init(frame: frameRect)
         _ = load(fromNIBNamed: "MainView")
         self.wantsLayer = true
-        self.ssdStackHelper = StackViewHelper(stackItemStoryboardId: "DiskVolumeStackItem", stack: self.stackSSD)
-        self.hddStackHelper = StackViewHelper(stackItemStoryboardId: "DiskVolumeStackItem", stack: self.stackHDD)
     }
     
     
@@ -99,10 +93,8 @@ class MainView: NSView, LoadableView {
         let server = servers[0]
         
         for disk in server.ssdGroup.disks {
-            let _ = self.ssdStackHelper.addStackItem(item: disk, onEdit: {}, onDelete: {}, onSelect: {})
         }
         for disk in server.hddGroup.disks {
-            let _ = self.hddStackHelper.addStackItem(item: disk, onEdit: {}, onDelete: {}, onSelect: {})
         }
         
     }
@@ -128,19 +120,15 @@ class MainView: NSView, LoadableView {
     }
     
     @IBAction func onAddSSDClicked(_ sender: NSButton) {
-        let _ = self.ssdStackHelper.addStackItem(item: Disk(volume: self.txtSSDVolumeName.stringValue), onEdit: {}, onDelete: {}, onSelect: {})
     }
     
     @IBAction func onAddHDDClicked(_ sender: NSButton) {
-        let _ = self.hddStackHelper.addStackItem(item: Disk(volume: self.txtHDDVolumeName.stringValue), onEdit: {}, onDelete: {}, onSelect: {})
     }
     
     @IBAction func onRemoveSSDClicked(_ sender: NSButton) {
-        self.ssdStackHelper.deleteStackItem(item: Disk(volume: self.txtSSDVolumeName.stringValue))
     }
     
     @IBAction func onRemoveHDDClicked(_ sender: NSButton) {
-        self.hddStackHelper.deleteStackItem(item: Disk(volume: self.txtHDDVolumeName.stringValue))
     }
     
 }

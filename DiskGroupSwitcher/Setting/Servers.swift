@@ -19,10 +19,10 @@ public class Disk : Codable {
     }
 }
 
-extension Disk : StackItemProtocol {
+extension Disk {
     
     public func getId() -> String {
-        return self.volume
+        return "/Volume/\(self.volume)"
     }
     
     public func getName() -> String {
@@ -72,7 +72,7 @@ public class Servers {
     private init() {}
     
     public func isExistServer(hostname:String) -> Bool {
-        if let server = self.servers.first(where: { s in
+        if let _ = self.servers.first(where: { s in
             return s.hostname == hostname
         }) {
             return true
