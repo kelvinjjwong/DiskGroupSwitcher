@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E0D9DF32B12DFA5005ADA1F /* DictionaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0D9DF22B12DFA5005ADA1F /* DictionaryTableViewController.swift */; };
 		8E2DA0C12B102F1600FC44B9 /* LoggerFactory in Frameworks */ = {isa = PBXBuildFile; productRef = 8E2DA0C02B102F1600FC44B9 /* LoggerFactory */; };
 		8E347D4E2B11108500DA30F5 /* Servers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E347D4D2B11108500DA30F5 /* Servers.swift */; };
 		8E347D502B111CE000DA30F5 /* SwiftJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E347D4F2B111CE000DA30F5 /* SwiftJSON.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E0D9DF22B12DFA5005ADA1F /* DictionaryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryTableViewController.swift; sourceTree = "<group>"; };
 		8E2DA0BE2B102D7C00FC44B9 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		8E347D4D2B11108500DA30F5 /* Servers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Servers.swift; sourceTree = "<group>"; };
 		8E347D4F2B111CE000DA30F5 /* SwiftJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftJSON.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				8E47288A2B0FA4AA00A265E7 /* StackView.swift */,
 				8E347D4F2B111CE000DA30F5 /* SwiftJSON.swift */,
 				8E347D512B111D2300DA30F5 /* Extensions.swift */,
+				8E0D9DF22B12DFA5005ADA1F /* DictionaryTableViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				8E4728592B0ECBAC00A265E7 /* ViewController.swift in Sources */,
 				8E347D4E2B11108500DA30F5 /* Servers.swift in Sources */,
 				8E4728572B0ECBAC00A265E7 /* AppDelegate.swift in Sources */,
+				8E0D9DF32B12DFA5005ADA1F /* DictionaryTableViewController.swift in Sources */,
 				8E47288B2B0FA4AA00A265E7 /* StackView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

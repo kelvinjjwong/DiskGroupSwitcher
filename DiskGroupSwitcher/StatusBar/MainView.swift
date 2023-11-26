@@ -26,6 +26,13 @@ class MainView: NSView, LoadableView {
     @IBOutlet weak var btnRemoveSSDVolume: NSButton!
     @IBOutlet weak var btnRemoveHDDVolume: NSButton!
     
+    @IBOutlet weak var tblSSD: NSTableView!
+    @IBOutlet weak var tblHDD: NSTableView!
+    
+    var ssdTableController : DictionaryTableViewController!
+    var hddTableController : DictionaryTableViewController!
+    
+    
     private var servers:[Server] = []
     
     // MARK: - Init
@@ -39,6 +46,30 @@ class MainView: NSView, LoadableView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    func loadSSDTable(data:[[String:String]]) {
+        
+        self.ssdTableController = DictionaryTableViewController(self.tblSSD)
+        self.ssdTableController.actionIcon = NSImage(named: "NSMenuMixedStateTemplate")
+        self.ssdTableController.onAction = { id in
+            
+            // do nothing
+        }
+        self.ssdTableController.load(data, afterLoaded: {
+        })
+    }
+    
+    func loadHDDTable(data:[[String:String]]) {
+        
+        self.hddTableController = DictionaryTableViewController(self.tblHDD)
+        self.hddTableController.actionIcon = NSImage(named: "NSMenuMixedStateTemplate")
+        self.hddTableController.onAction = { id in
+            
+            // do nothing
+        }
+        self.hddTableController.load(data, afterLoaded: {
+        })
     }
     
     func onOpen() {
@@ -92,10 +123,29 @@ class MainView: NSView, LoadableView {
         
         let server = servers[0]
         
+        var ssdVolumes:[[String:String]] = []
         for disk in server.ssdGroup.disks {
+            var volume:[String:String] = [:]
+            volume["volume"] = disk.getName()
+            volume["status"] = disk.online ? "online" : "offline"
+            volume["status#textColor"] = disk.online ? "00FF00" : "7F7F7F"
+            ssdVolumes.append(volume)
         }
+        
+        self.loadSSDTable(data: ssdVolumes)
+        
+        var hddVolumes:[[String:String]] = []
         for disk in server.hddGroup.disks {
+            var volume:[String:String] = [:]
+            volume["volume"] = disk.getName()
+            volume["status"] = disk.online ? "online" : "offline"
+            volume["status#textColor"] = disk.online ? "00FF00" : "7F7F7F"
+            hddVolumes.append(volume)
         }
+        
+        self.loadHDDTable(data: hddVolumes)
+        
+        print(NSColor(named: "gray"))
         
     }
     
