@@ -25,6 +25,42 @@ extension String {
         guard let range = self.range(of: string) else { return self }
         return replacingCharacters(in: range, with: replacement)
     }
+    
+    func getVolumeFromThisPath() -> (String, String) {
+        if self.hasPrefix("/Volumes/") {
+            let parts = self.components(separatedBy: "/")
+            let volume = "/\(parts[1])/\(parts[2])"
+            let _path = self.replacingFirstOccurrence(of: volume, with: "")
+            return (volume, _path)
+        }else{
+            return ("", self)
+        }
+    }
+    
+    
+    func isVolumeExists() -> Bool {
+        let (volume, _) = self.getVolumeFromThisPath()
+        let mountedVolumes = LocalDirectory.bridge.listMountedVolumes()
+        
+        return mountedVolumes.contains(volume)
+    }
+    
+    func isDirectoryExists() -> Bool {
+        var isDir:ObjCBool = false
+        if FileManager.default.fileExists(atPath: self, isDirectory: &isDir) {
+            if isDir.boolValue == true {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func isFileExists() -> Bool {
+        if FileManager.default.fileExists(atPath: self) {
+            return true
+        }
+        return false
+    }
 }
 
 extension Array {

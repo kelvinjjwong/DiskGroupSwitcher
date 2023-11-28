@@ -22,6 +22,15 @@
 		8E4728852B0F97FB00A265E7 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E4728842B0F97FA00A265E7 /* MainView.xib */; };
 		8E4728872B0F980600A265E7 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4728862B0F980600A265E7 /* MainView.swift */; };
 		8E47288B2B0FA4AA00A265E7 /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E47288A2B0FA4AA00A265E7 /* StackView.swift */; };
+		8E7342892B1527630062E845 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8E7342882B1527630062E845 /* Alamofire */; };
+		8E73428C2B1537A20062E845 /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E73428B2B1537A20062E845 /* HTTPResponse.swift */; };
+		8E73428E2B15391A0062E845 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E73428D2B15391A0062E845 /* Defaults.swift */; };
+		8E7342902B1543380062E845 /* CLI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E73428F2B1543380062E845 /* CLI.swift */; };
+		8EC3B2F02B15171500E73878 /* Criollo in Frameworks */ = {isa = PBXBuildFile; productRef = 8EC3B2EF2B15171500E73878 /* Criollo */; };
+		8EC3B2F52B151BD200E73878 /* HTTPServerCriollo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC3B2F42B151BD200E73878 /* HTTPServerCriollo.swift */; };
+		8EC3B2F72B151D0F00E73878 /* HTTPServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC3B2F62B151D0F00E73878 /* HTTPServer.swift */; };
+		8EC3B2F92B151E5C00E73878 /* HealthCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC3B2F82B151E5C00E73878 /* HealthCheck.swift */; };
+		8EC3B2FB2B15245800E73878 /* LocalDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC3B2FA2B15245800E73878 /* LocalDirectory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +65,14 @@
 		8E4728882B0F9D4800A265E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8E47288A2B0FA4AA00A265E7 /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
 		8E47288C2B0FB40200A265E7 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		8E73428B2B1537A20062E845 /* HTTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPResponse.swift; sourceTree = "<group>"; };
+		8E73428D2B15391A0062E845 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
+		8E73428F2B1543380062E845 /* CLI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLI.swift; sourceTree = "<group>"; };
 		8EC3B2EB2B11679900E73878 /* functional-test.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "functional-test.xctestplan"; sourceTree = "<group>"; };
+		8EC3B2F42B151BD200E73878 /* HTTPServerCriollo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPServerCriollo.swift; sourceTree = "<group>"; };
+		8EC3B2F62B151D0F00E73878 /* HTTPServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPServer.swift; sourceTree = "<group>"; };
+		8EC3B2F82B151E5C00E73878 /* HealthCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCheck.swift; sourceTree = "<group>"; };
+		8EC3B2FA2B15245800E73878 /* LocalDirectory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +80,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E7342892B1527630062E845 /* Alamofire in Frameworks */,
 				8E2DA0C12B102F1600FC44B9 /* LoggerFactory in Frameworks */,
+				8EC3B2F02B15171500E73878 /* Criollo in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,6 +129,8 @@
 		8E4728552B0ECBAC00A265E7 /* DiskGroupSwitcher */ = {
 			isa = PBXGroup;
 			children = (
+				8E73428A2B15378E0062E845 /* HTTPClient */,
+				8EC3B2F32B151BAB00E73878 /* HTTPServer */,
 				8E4728892B0FA0D200A265E7 /* Common */,
 				8EC3B2EA2B11652600E73878 /* Setting */,
 				8E4728812B0ECC3400A265E7 /* StatusBar */,
@@ -150,16 +170,37 @@
 				8E347D4F2B111CE000DA30F5 /* SwiftJSON.swift */,
 				8E347D512B111D2300DA30F5 /* Extensions.swift */,
 				8E0D9DF22B12DFA5005ADA1F /* DictionaryTableViewController.swift */,
+				8EC3B2FA2B15245800E73878 /* LocalDirectory.swift */,
+				8E73428F2B1543380062E845 /* CLI.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		8E73428A2B15378E0062E845 /* HTTPClient */ = {
+			isa = PBXGroup;
+			children = (
+				8E73428B2B1537A20062E845 /* HTTPResponse.swift */,
+			);
+			path = HTTPClient;
 			sourceTree = "<group>";
 		};
 		8EC3B2EA2B11652600E73878 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
 				8E347D4D2B11108500DA30F5 /* Servers.swift */,
+				8E73428D2B15391A0062E845 /* Defaults.swift */,
 			);
 			path = Setting;
+			sourceTree = "<group>";
+		};
+		8EC3B2F32B151BAB00E73878 /* HTTPServer */ = {
+			isa = PBXGroup;
+			children = (
+				8EC3B2F42B151BD200E73878 /* HTTPServerCriollo.swift */,
+				8EC3B2F62B151D0F00E73878 /* HTTPServer.swift */,
+				8EC3B2F82B151E5C00E73878 /* HealthCheck.swift */,
+			);
+			path = HTTPServer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,6 +221,8 @@
 			name = DiskGroupSwitcher;
 			packageProductDependencies = (
 				8E2DA0C02B102F1600FC44B9 /* LoggerFactory */,
+				8EC3B2EF2B15171500E73878 /* Criollo */,
+				8E7342882B1527630062E845 /* Alamofire */,
 			);
 			productName = DiskGroupSwitcher;
 			productReference = 8E4728532B0ECBAC00A265E7 /* DiskGroupSwitcher.app */;
@@ -233,6 +276,8 @@
 			mainGroup = 8E47284A2B0ECBAC00A265E7;
 			packageReferences = (
 				8E2DA0BF2B102F1600FC44B9 /* XCRemoteSwiftPackageReference "LoggerFactory" */,
+				8EC3B2EE2B15171500E73878 /* XCRemoteSwiftPackageReference "Criollo" */,
+				8E7342872B1527630062E845 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 8E4728542B0ECBAC00A265E7 /* Products */;
 			projectDirPath = "";
@@ -269,14 +314,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EC3B2F72B151D0F00E73878 /* HTTPServer.swift in Sources */,
 				8E4728832B0ECC5600A265E7 /* LoadableView.swift in Sources */,
+				8EC3B2F52B151BD200E73878 /* HTTPServerCriollo.swift in Sources */,
 				8E347D522B111D2300DA30F5 /* Extensions.swift in Sources */,
 				8E347D502B111CE000DA30F5 /* SwiftJSON.swift in Sources */,
 				8E4728872B0F980600A265E7 /* MainView.swift in Sources */,
+				8EC3B2FB2B15245800E73878 /* LocalDirectory.swift in Sources */,
+				8E7342902B1543380062E845 /* CLI.swift in Sources */,
 				8E4728592B0ECBAC00A265E7 /* ViewController.swift in Sources */,
 				8E347D4E2B11108500DA30F5 /* Servers.swift in Sources */,
+				8EC3B2F92B151E5C00E73878 /* HealthCheck.swift in Sources */,
 				8E4728572B0ECBAC00A265E7 /* AppDelegate.swift in Sources */,
 				8E0D9DF32B12DFA5005ADA1F /* DictionaryTableViewController.swift in Sources */,
+				8E73428E2B15391A0062E845 /* Defaults.swift in Sources */,
+				8E73428C2B1537A20062E845 /* HTTPResponse.swift in Sources */,
 				8E47288B2B0FA4AA00A265E7 /* StackView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -372,6 +424,7 @@
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -427,6 +480,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -569,6 +623,22 @@
 				minimumVersion = 1.1.1;
 			};
 		};
+		8E7342872B1527630062E845 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.1;
+			};
+		};
+		8EC3B2EE2B15171500E73878 /* XCRemoteSwiftPackageReference "Criollo" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/thecatalinstan/Criollo.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -576,6 +646,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8E2DA0BF2B102F1600FC44B9 /* XCRemoteSwiftPackageReference "LoggerFactory" */;
 			productName = LoggerFactory;
+		};
+		8E7342882B1527630062E845 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E7342872B1527630062E845 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		8EC3B2EF2B15171500E73878 /* Criollo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8EC3B2EE2B15171500E73878 /* XCRemoteSwiftPackageReference "Criollo" */;
+			productName = Criollo;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

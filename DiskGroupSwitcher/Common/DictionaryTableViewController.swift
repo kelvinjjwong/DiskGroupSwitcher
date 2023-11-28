@@ -187,7 +187,7 @@ extension DictionaryTableViewController: NSTableViewDelegate {
         }
         
         if index >= 0 {
-            var edititem = items[index]
+            let edititem = items[index]
             
             self.logger.log("actioned: \(edititem)")
             self.onAction?(id)

@@ -6,6 +6,8 @@
 //
 
 import Cocoa
+import LoggerFactory
+import Criollo
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -18,10 +20,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
+        LoggerFactory.append(logWriter: ConsoleLogger())
+        LoggerFactory.append(logWriter: FileLogger())
+        LoggerFactory.enable([.info, .error, .warning, .trace, .debug])
+        HTTPServer.default.start()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
+        HTTPServer.default.stop()
     }
 
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
