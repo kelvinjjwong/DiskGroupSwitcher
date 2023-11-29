@@ -31,6 +31,12 @@ class MainView: NSView, LoadableView {
     @IBOutlet weak var btnRemoveHDDVolume: NSButton!
     @IBOutlet weak var txtSSDLink: NSTextField!
     @IBOutlet weak var txtHDDLink: NSTextField!
+    @IBOutlet weak var btnAddServer: NSButton!
+    @IBOutlet weak var btnRemoveServer: NSButton!
+    @IBOutlet weak var btnSaveServer: NSButton!
+    @IBOutlet weak var lblSSDLinked: NSTextField!
+    @IBOutlet weak var lblHDDLinked: NSTextField!
+    @IBOutlet weak var txtServer: NSTextField!
     
     @IBOutlet weak var tblSSD: NSTableView!
     @IBOutlet weak var tblHDD: NSTableView!
@@ -43,6 +49,11 @@ class MainView: NSView, LoadableView {
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         _ = load(fromNIBNamed: "MainView")
+        self.lblSSDLinked.isHidden = true
+        self.lblHDDLinked.isHidden = true
+        self.txtServer.isHidden = true
+        self.btnSaveServer.isHidden = true
+        
         self.initData()
         self.startScheduler()
     }
@@ -95,7 +106,7 @@ class MainView: NSView, LoadableView {
     }
     
     func startScheduler() {
-        let timer1 = Timer.scheduledTimer(withTimeInterval: 15, repeats: true, block:{_ in
+        let timer1 = Timer.scheduledTimer(withTimeInterval: 10, repeats: true, block:{_ in
             if self.isOpened {
                 DispatchQueue.main.async {
                     self.updateDiskStatus()
@@ -137,14 +148,24 @@ class MainView: NSView, LoadableView {
             }
         })
         
+        let timer5 = Timer.scheduledTimer(withTimeInterval: 3, repeats: true, block:{_ in
+            if self.isOpened {
+                DispatchQueue.main.async {
+                    self.updateSoftlinkStatus()
+                }
+            }
+        })
+        
         timer1.fire()
         timer2.fire()
         timer3.fire()
         timer4.fire()
+        timer5.fire()
         RunLoop.current.add(timer1, forMode: .common)
         RunLoop.current.add(timer2, forMode: .common)
         RunLoop.current.add(timer3, forMode: .common)
         RunLoop.current.add(timer4, forMode: .common)
+        RunLoop.current.add(timer5, forMode: .common)
         self.logger.log("Scheduler started.")
     }
     
@@ -154,6 +175,37 @@ class MainView: NSView, LoadableView {
                 Servers.stored.updateDiskStatus(hostname: server.hostname, volume: disk.volume, state: resp.mounted)
             }
         }
+    }
+    
+    func updateSoftlinkStatus() {
+        let server = Servers.stored.getServer(index: self.cmbServer.indexOfSelectedItem)
+        DispatchQueue.global().async {
+            
+            let arraySSD = server.ssdGroup.disks.map { disk in
+                return disk.isLinked()
+            }
+            DispatchQueue.main.async {
+                self.lblSSDLinked.isHidden = arraySSD.contains(false)
+                if !self.lblSSDLinked.isHidden {
+                    self.btnSwitch.selectedSegment = 0
+                }
+            }
+            
+            let arrayHDD = server.hddGroup.disks.map { disk in
+                return disk.isLinked()
+            }
+            DispatchQueue.main.async {
+                self.lblHDDLinked.isHidden = arrayHDD.contains(false)
+                if !self.lblHDDLinked.isHidden {
+                    self.btnSwitch.selectedSegment = 2
+                }
+                
+                if self.lblHDDLinked.isHidden && self.lblSSDLinked.isHidden {
+                    self.btnSwitch.selectedSegment = 1
+                }
+            }
+        }
+        
     }
     
     func updateDiskStatus() {
@@ -270,7 +322,12 @@ class MainView: NSView, LoadableView {
                 let volumes = server.hddGroup.volumes()
                 _ = CLI.get.umount(volumes: volumes)
                 var n = volumes.count
+                let startTime = Date()
                 while(n > 0){
+                    let now = Date()
+                    if now.timeIntervalSince(startTime) > 3 {
+                        break
+                    }
                     let lines = CLI.get.listmount(volumes: volumes)
                     n = lines.count
                 }
@@ -280,9 +337,35 @@ class MainView: NSView, LoadableView {
     }
     
     @IBAction func onSwitchClicked(_ sender: NSSegmentedControl) {
+        let server = Servers.stored.getServer(index: self.cmbServer.indexOfSelectedItem)
         if sender.selectedSegment == 0 { // selected SSD
+            for disk in server.hddGroup.disks {
+                disk.unlink()
+            }
+            for disk in server.ssdGroup.disks {
+                disk.unlink()
+            }
+            for disk in server.ssdGroup.disks {
+                disk.link()
+            }
+        }else if sender.selectedSegment == 1 { // selected none
+            for disk in server.hddGroup.disks {
+                disk.unlink()
+            }
+            for disk in server.ssdGroup.disks {
+                disk.unlink()
+            }
             
-        }else{ // selected HDD
+        }else if sender.selectedSegment == 2 { // selected HDD
+            for disk in server.hddGroup.disks {
+                disk.unlink()
+            }
+            for disk in server.ssdGroup.disks {
+                disk.unlink()
+            }
+            for disk in server.hddGroup.disks {
+                disk.link()
+            }
             
         }
     }
@@ -328,6 +411,15 @@ class MainView: NSView, LoadableView {
         let server = Servers.stored.getServer(index: cmbServer.indexOfSelectedItem)
         Servers.stored.removeHddDisk(hostname: server.hostname, volume: self.txtHDDVolumeName.stringValue)
         self.loadHDDTable(data: server.getHddDisks())
+    }
+    
+    @IBAction func onAddServerClicked(_ sender: NSButton) {
+    }
+    
+    @IBAction func onRemoveServerClicked(_ sender: NSButton) {
+    }
+    
+    @IBAction func onSaveServerClicked(_ sender: NSButton) {
     }
     
     func prepareStubServers() {

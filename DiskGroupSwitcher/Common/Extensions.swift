@@ -37,6 +37,17 @@ extension String {
         }
     }
     
+    func getSoftlinkTargetFromThisPath() -> String {
+        return LocalDirectory.bridge.getSoftlink(path: self)
+    }
+    
+    func unlink() {
+        LocalDirectory.bridge.unlink(softlink: self)
+    }
+    
+    func link(to target:String) {
+        LocalDirectory.bridge.link(softlink: self, target: target)
+    }
     
     func isVolumeExists() -> Bool {
         let (volume, _) = self.getVolumeFromThisPath()

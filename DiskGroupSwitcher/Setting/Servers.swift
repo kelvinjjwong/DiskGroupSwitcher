@@ -11,20 +11,33 @@ import LoggerFactory
 public class Disk : Codable {
     var volume:String = ""
     var online:Bool = false
-    var link:String = ""
+    var softlink:String = ""
     
     public init() {}
     
     public convenience init(volume: String, link: String = "") {
         self.init()
         self.volume = volume
-        self.link = link
+        self.softlink = link
     }
     
     public func isOnline() -> Bool {
         guard self.volume != "" else {return false}
         let volume = "/Volumes/\(self.volume)"
         return volume.isVolumeExists()
+    }
+    
+    public func isLinked() -> Bool {
+        guard self.softlink != "" else {return true}
+        return self.softlink.getSoftlinkTargetFromThisPath() == "/Volumes/\(self.volume)"
+    }
+    
+    public func unlink() {
+        self.softlink.unlink()
+    }
+    
+    public func link() {
+        self.softlink.link(to: "/Volumes/\(self.volume)")
     }
 }
 
@@ -89,7 +102,7 @@ public class Server : Codable {
             volume["volume"] = disk.getName()
             volume["status"] = disk.online ? "online" : "offline"
             volume["status#textColor"] = disk.online ? "00FF00" : "7F7F7F"
-            volume["softlink"] = disk.link
+            volume["softlink"] = disk.softlink
             ssdVolumes.append(volume)
         }
         return ssdVolumes
@@ -102,7 +115,7 @@ public class Server : Codable {
             volume["volume"] = disk.getName()
             volume["status"] = disk.online ? "online" : "offline"
             volume["status#textColor"] = disk.online ? "00FF00" : "7F7F7F"
-            volume["softlink"] = disk.link
+            volume["softlink"] = disk.softlink
             hddVolumes.append(volume)
         }
         return hddVolumes

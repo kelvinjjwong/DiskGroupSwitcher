@@ -35,9 +35,9 @@ struct CLI {
             let data = pipe.fileHandleForReading.readDataToEndOfFile()
             let string:String = String(data: data, encoding: String.Encoding.utf8)!
             pipe.fileHandleForReading.closeFile()
-            if string != "" {
-                self.logger.log(string)
-            }
+//            if string != "" {
+//                self.logger.log(string)
+//            }
     }
     
     func turnOff(siriComponent:String) {
@@ -59,9 +59,9 @@ struct CLI {
             let data = pipe.fileHandleForReading.readDataToEndOfFile()
             let string:String = String(data: data, encoding: String.Encoding.utf8)!
             pipe.fileHandleForReading.closeFile()
-            if string != "" {
-                self.logger.log(string)
-            }
+//            if string != "" {
+//                self.logger.log(string)
+//            }
     }
     
     func query(siriComponent:String) {
@@ -80,9 +80,9 @@ struct CLI {
             let data = pipe.fileHandleForReading.readDataToEndOfFile()
             let string:String = String(data: data, encoding: String.Encoding.utf8)!
             pipe.fileHandleForReading.closeFile()
-            if string != "" {
-                self.logger.log(string)
-            }
+//            if string != "" {
+//                self.logger.log(string)
+//            }
         }
     }
     
@@ -104,7 +104,7 @@ struct CLI {
             let string:String = String(data: data, encoding: String.Encoding.utf8)!
             pipe.fileHandleForReading.closeFile()
             if string != "" {
-                self.logger.log(string)
+//                self.logger.log(string)
                 rtn = string.components(separatedBy: "\n")
             }
         }
@@ -119,7 +119,7 @@ struct CLI {
             command.standardOutput = pipe
             command.standardError = pipe
             command.launchPath = "/bin/bash"
-            command.arguments = ["-c", "mount | egrep \"\(volumes.joined(separator: "|"))\""]
+            command.arguments = ["-c", "mount | grep \"local,\" | grep -v \"nobrowse\" | grep -v \"read-only\" | egrep \"\(volumes.joined(separator: "|"))\""]
             do {
                 try command.run()
             }catch{
@@ -129,7 +129,7 @@ struct CLI {
             let string:String = String(data: data, encoding: String.Encoding.utf8)!
             pipe.fileHandleForReading.closeFile()
             if string != "" {
-                self.logger.log(string)
+//                self.logger.log(string)
                 rtn = string.components(separatedBy: "\n")
             }
         }

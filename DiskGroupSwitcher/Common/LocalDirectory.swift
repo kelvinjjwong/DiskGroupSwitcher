@@ -176,6 +176,79 @@ struct LocalDirectory {
         return volumes
     }
     
+    func getSoftlink(path:String) -> String {
+        let pipe = Pipe()
+        autoreleasepool { () -> Void in
+            let command = Process()
+            command.standardOutput = pipe
+            command.standardError = pipe
+            command.currentDirectoryPath = "/Users/"
+            command.launchPath = "/bin/bash"
+            command.arguments = ["-c", "ls -l \(path) | awk -F' ' '{print substr($0, index($0,$9))}'"]
+            do {
+                try command.run()
+            }catch{
+                self.logger.log(.error, error)
+            }
+        }
+        //command.waitUntilExit()
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        let string:String = String(data: data, encoding: String.Encoding.utf8)!
+        pipe.fileHandleForReading.closeFile()
+        
+        let lines = string.components(separatedBy: "\n")
+        for line in lines {
+            if line == "" {continue}
+            if line.contains(" -> ") {
+                let parts = line.components(separatedBy: " -> ")
+                return parts[1]
+            }
+        }
+        return ""
+    }
+    
+    func unlink(softlink:String) {
+        let pipe = Pipe()
+        autoreleasepool { () -> Void in
+            let command = Process()
+            command.standardOutput = pipe
+            command.standardError = pipe
+            command.currentDirectoryPath = "/Users/"
+            command.launchPath = "/bin/bash"
+            command.arguments = ["-c", "rm -f \"\(softlink)\""]
+            do {
+                try command.run()
+            }catch{
+                self.logger.log(.error, error)
+            }
+        }
+        //command.waitUntilExit()
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        _ = String(data: data, encoding: String.Encoding.utf8)!
+        pipe.fileHandleForReading.closeFile()
+    }
+    
+    func link(softlink:String, target:String) {
+        let pipe = Pipe()
+        autoreleasepool { () -> Void in
+            let command = Process()
+            command.standardOutput = pipe
+            command.standardError = pipe
+            command.currentDirectoryPath = "/Users/"
+            command.launchPath = "/bin/bash"
+            command.arguments = ["-c", "ln -s \"\(target)\" \"\(softlink)\""]
+            do {
+                try command.run()
+            }catch{
+                self.logger.log(.error, error)
+            }
+        }
+        //command.waitUntilExit()
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        _ = String(data: data, encoding: String.Encoding.utf8)!
+        pipe.fileHandleForReading.closeFile()
+    }
+    
     func listMountedVolumes() -> [String] {
         let pipe = Pipe()
         autoreleasepool { () -> Void in
@@ -183,8 +256,8 @@ struct LocalDirectory {
             command.standardOutput = pipe
             command.standardError = pipe
             command.currentDirectoryPath = "/Volumes/"
-            command.launchPath = "/bin/ls"
-            command.arguments = ["-1", "/Volumes/"]
+            command.launchPath = "/bin/bash"
+            command.arguments = ["-c", "ls -l /Volumes | grep \"x+ \" | awk -F' ' '{print substr($0, index($0,$9))}'"]
             do {
                 try command.run()
             }catch{
