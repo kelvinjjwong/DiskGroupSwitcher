@@ -72,6 +72,7 @@
 		8E5B91852B1945540034E877 /* http-server-test.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "http-server-test.xctestplan"; sourceTree = "<group>"; };
 		8E5B91862B19466D0034E877 /* HTTPServerFlyingFox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPServerFlyingFox.swift; sourceTree = "<group>"; };
 		8E5B91882B1976BE0034E877 /* Alamofire+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alamofire+.swift"; sourceTree = "<group>"; };
+		8E5B918A2B19C0B00034E877 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		8E73428B2B1537A20062E845 /* HTTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPResponse.swift; sourceTree = "<group>"; };
 		8E73428D2B15391A0062E845 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		8E73428F2B1543380062E845 /* CLI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLI.swift; sourceTree = "<group>"; };
@@ -116,6 +117,7 @@
 		8E47284A2B0ECBAC00A265E7 = {
 			isa = PBXGroup;
 			children = (
+				8E5B918A2B19C0B00034E877 /* LICENSE */,
 				8E2DA0BE2B102D7C00FC44B9 /* Package.swift */,
 				8E47288C2B0FB40200A265E7 /* README.md */,
 				8E4728552B0ECBAC00A265E7 /* DiskGroupSwitcher */,
