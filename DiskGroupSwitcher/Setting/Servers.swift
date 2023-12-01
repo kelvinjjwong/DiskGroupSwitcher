@@ -25,12 +25,14 @@ public class Disk : Codable {
     public func isOnline() -> Bool {
         guard self.volume != "" else {return false}
         let volume = "/Volumes/\(self.volume)"
-        return volume.isVolumeExists()
+        self.online = volume.isVolumeExists()
+        return self.online
     }
     
     public func isLinked() -> Bool {
         guard self.softlink != "" else {return true}
-        return self.softlink.getSoftlinkTargetFromThisPath() == "/Volumes/\(self.volume)"
+        self.linked = self.softlink.getSoftlinkTargetFromThisPath() == "/Volumes/\(self.volume)"
+        return self.linked
     }
     
     public func unlink() {
@@ -68,8 +70,11 @@ public class DiskGroup : Codable  {
     }
     
     public func isOnline() -> Bool {
+        if self.disks.isEmpty {
+            return false
+        }
         let array = self.disks.map { disk in
-            return disk.isOnline()
+            return disk.online
         }
         return !array.contains(false)
     }
