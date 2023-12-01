@@ -250,7 +250,7 @@ class MainView: NSView, LoadableView {
                 return disk.linked
             }
             DispatchQueue.main.async {
-                self.lblSSDLinked.isHidden = arraySSD.contains(false)
+                self.lblSSDLinked.isHidden = arraySSD.isEmpty || arraySSD.contains(false)
                 if !self.lblSSDLinked.isHidden {
                     self.btnSwitch.selectedSegment = 0
                 }
@@ -260,7 +260,7 @@ class MainView: NSView, LoadableView {
                 return disk.linked
             }
             DispatchQueue.main.async {
-                self.lblHDDLinked.isHidden = arrayHDD.contains(false)
+                self.lblHDDLinked.isHidden = arrayHDD.isEmpty || arrayHDD.contains(false)
                 if !self.lblHDDLinked.isHidden {
                     self.btnSwitch.selectedSegment = 2
                 }
@@ -392,6 +392,9 @@ class MainView: NSView, LoadableView {
     
     // todo: change to HTTP API
     @IBAction func onSwitchClicked(_ sender: NSSegmentedControl) {
+        if let label = sender.label(forSegment: sender.selectedSegment), label.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || label.trimmingCharacters(in: .whitespacesAndNewlines).hasSuffix("_TBC") {
+            return
+        }
         let server = Servers.stored.getServer(index: self.cmbServer.indexOfSelectedItem)
         struct R: Encodable {
             let volume: String
@@ -407,7 +410,6 @@ class MainView: NSView, LoadableView {
         }
         
         if sender.selectedSegment == 0 { // selected SSD
-            
             let jsonEncoder = JSONEncoder()
             do {
                 let jsonData = try jsonEncoder.encode(array)

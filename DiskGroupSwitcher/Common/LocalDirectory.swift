@@ -257,7 +257,7 @@ struct LocalDirectory {
             command.standardError = pipe
             command.currentDirectoryPath = "/Volumes/"
             command.launchPath = "/bin/bash"
-            command.arguments = ["-c", "ls -l /Volumes | grep \"x+ \" | awk -F' ' '{print substr($0, index($0,$9))}'"]
+            command.arguments = ["-c", "ls -l /Volumes | grep \"drwxrwxr-x\" | awk -F' ' '{print substr($0, index($0,$9))}'"]
             do {
                 try command.run()
             }catch{
