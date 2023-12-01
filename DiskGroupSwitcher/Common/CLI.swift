@@ -24,7 +24,7 @@ struct CLI {
             command.standardError = pipe
 //            command.currentDirectoryURL = URL(fileURLWithPath: "/Users/kelvinwong/Documents")
             command.launchPath = "/bin/bash"
-            command.arguments = ["-c", "/usr/local/bin/macism com.apple.keylayout.ABC; /usr/local/bin/cliclick kd:alt kp:space ku:alt w:250 t:\"turn on \(siriComponent)\" kp:return"]
+            command.arguments = ["-c", "/usr/local/bin/macism com.apple.keylayout.ABC; /usr/local/bin/cliclick kd:fn kp:f11 ku:fn kd:alt kp:space ku:alt w:250 t:\"turn on \(siriComponent)\" kp:return kd:fn kp:f11 ku:fn"]
             do {
                 self.logger.log(.trace, command.arguments![1])
                 try command.run()
@@ -48,7 +48,7 @@ struct CLI {
             command.standardError = pipe
             command.currentDirectoryURL = URL(fileURLWithPath: "/Users")
             command.launchPath = "/bin/bash"
-            command.arguments = ["-c", "/usr/local/bin/macism com.apple.keylayout.ABC; /usr/local/bin/cliclick kd:alt kp:space ku:alt w:250 t:\"shut down \(siriComponent)\" kp:return"]
+            command.arguments = ["-c", "/usr/local/bin/macism com.apple.keylayout.ABC; /usr/local/bin/cliclick kd:fn kp:f11 ku:fn kd:alt kp:space ku:alt w:250 t:\"shut down \(siriComponent)\" kp:return kd:fn kp:f11 ku:fn"]
             do {
                 self.logger.log(.trace, command.arguments![1])
                 try command.run()
@@ -71,7 +71,7 @@ struct CLI {
             command.standardOutput = pipe
             command.standardError = pipe
             command.launchPath = "/bin/bash"
-            command.arguments = ["-c", "/usr/local/bin/macism com.apple.keylayout.ABC; /usr/local/bin/cliclick kd:alt kp:space ku:alt w:250 t:\"is \(siriComponent) on?\" kp:return"]
+            command.arguments = ["-c", "/usr/local/bin/macism com.apple.keylayout.ABC; /usr/local/bin/cliclick kd:fn kp:f11 ku:fn kd:alt kp:space ku:alt w:250 t:\"is \(siriComponent) on?\" kp:return kd:fn kp:f11 ku:fn"]
             do {
                 try command.run()
             }catch{

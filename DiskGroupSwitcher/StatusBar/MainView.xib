@@ -22,7 +22,6 @@
                 <outlet property="btnToggleSSD" destination="Pxk-mn-DYu" id="Cm7-sy-iwE"/>
                 <outlet property="cmbServer" destination="eor-Jx-88R" id="Gg3-Yh-Dac"/>
                 <outlet property="lblHDDLinked" destination="TKW-rk-gdw" id="ZkD-rN-msR"/>
-                <outlet property="lblMessage" destination="VFB-f8-4dY" id="IVC-6q-a85"/>
                 <outlet property="lblSSDLinked" destination="5Ec-ha-e2n" id="hbl-y2-oj0"/>
                 <outlet property="lblServerStatus" destination="VFB-f8-4dY" id="mCK-f4-YeQ"/>
                 <outlet property="tblHDD" destination="SU2-62-CWw" id="eZA-Ib-wdk"/>
@@ -176,9 +175,9 @@
                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VFB-f8-4dY">
                     <rect key="frame" x="407" y="408" width="59" height="16"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="online" id="LIB-NF-Qy7">
+                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="offline" id="LIB-NF-Qy7">
                         <font key="font" usesAppearanceFont="YES"/>
-                        <color key="textColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>

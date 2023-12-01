@@ -13,7 +13,7 @@ public class Defaults {
     
     private init() {}
     
-    public func httpPort() -> UInt {
+    public func httpPort() -> Int {
         return 18080
     }
 }

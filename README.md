@@ -1,5 +1,5 @@
 #  DiskGroupSwitcher
 
-require Swift >= 5.7
+require Swift >= 5.9
 
 

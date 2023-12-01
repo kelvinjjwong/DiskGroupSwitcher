@@ -7,7 +7,6 @@
 
 import Cocoa
 import LoggerFactory
-import Criollo
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -22,7 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to initialize your application
         LoggerFactory.append(logWriter: ConsoleLogger())
         LoggerFactory.append(logWriter: FileLogger())
-        LoggerFactory.enable([.info, .error, .warning, .trace, .debug])
+        LoggerFactory.enable([.info, .error, .warning])
         HTTPServer.default.start()
     }
 

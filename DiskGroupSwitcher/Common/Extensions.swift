@@ -9,6 +9,7 @@ import Cocoa
 
 
 extension String {
+    
     func toJSONArray() -> [JSON] {
         if let data = self.data(using: .utf8) {
             do {

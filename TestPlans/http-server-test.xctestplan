@@ -1,0 +1,27 @@
+{
+  "configurations" : [
+    {
+      "id" : "208B4B6F-DA96-4570-96B3-5F5D1FF4519C",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "selectedTests" : [
+        "HTTPServerTests\/testHTTPServer()"
+      ],
+      "target" : {
+        "containerPath" : "container:DiskGroupSwitcher.xcodeproj",
+        "identifier" : "8E4728632B0ECBAE00A265E7",
+        "name" : "DiskGroupSwitcherTests"
+      }
+    }
+  ],
+  "version" : 1
+}

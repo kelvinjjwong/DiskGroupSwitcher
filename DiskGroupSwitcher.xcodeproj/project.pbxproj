@@ -22,12 +22,15 @@
 		8E4728852B0F97FB00A265E7 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E4728842B0F97FA00A265E7 /* MainView.xib */; };
 		8E4728872B0F980600A265E7 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4728862B0F980600A265E7 /* MainView.swift */; };
 		8E47288B2B0FA4AA00A265E7 /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E47288A2B0FA4AA00A265E7 /* StackView.swift */; };
+		8E5B91802B1944880034E877 /* FlyingFox in Frameworks */ = {isa = PBXBuildFile; productRef = 8E5B917F2B1944880034E877 /* FlyingFox */; };
+		8E5B91822B1944880034E877 /* FlyingSocks in Frameworks */ = {isa = PBXBuildFile; productRef = 8E5B91812B1944880034E877 /* FlyingSocks */; };
+		8E5B91842B1944CC0034E877 /* HTTPServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5B91832B1944CC0034E877 /* HTTPServerTests.swift */; };
+		8E5B91872B19466D0034E877 /* HTTPServerFlyingFox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5B91862B19466D0034E877 /* HTTPServerFlyingFox.swift */; };
+		8E5B91892B1976BE0034E877 /* Alamofire+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5B91882B1976BE0034E877 /* Alamofire+.swift */; };
 		8E7342892B1527630062E845 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8E7342882B1527630062E845 /* Alamofire */; };
 		8E73428C2B1537A20062E845 /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E73428B2B1537A20062E845 /* HTTPResponse.swift */; };
 		8E73428E2B15391A0062E845 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E73428D2B15391A0062E845 /* Defaults.swift */; };
 		8E7342902B1543380062E845 /* CLI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E73428F2B1543380062E845 /* CLI.swift */; };
-		8EC3B2F02B15171500E73878 /* Criollo in Frameworks */ = {isa = PBXBuildFile; productRef = 8EC3B2EF2B15171500E73878 /* Criollo */; };
-		8EC3B2F52B151BD200E73878 /* HTTPServerCriollo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC3B2F42B151BD200E73878 /* HTTPServerCriollo.swift */; };
 		8EC3B2F72B151D0F00E73878 /* HTTPServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC3B2F62B151D0F00E73878 /* HTTPServer.swift */; };
 		8EC3B2F92B151E5C00E73878 /* HealthCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC3B2F82B151E5C00E73878 /* HealthCheck.swift */; };
 		8EC3B2FB2B15245800E73878 /* LocalDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC3B2FA2B15245800E73878 /* LocalDirectory.swift */; };
@@ -65,11 +68,14 @@
 		8E4728882B0F9D4800A265E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8E47288A2B0FA4AA00A265E7 /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
 		8E47288C2B0FB40200A265E7 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		8E5B91832B1944CC0034E877 /* HTTPServerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPServerTests.swift; sourceTree = "<group>"; };
+		8E5B91852B1945540034E877 /* http-server-test.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "http-server-test.xctestplan"; sourceTree = "<group>"; };
+		8E5B91862B19466D0034E877 /* HTTPServerFlyingFox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPServerFlyingFox.swift; sourceTree = "<group>"; };
+		8E5B91882B1976BE0034E877 /* Alamofire+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alamofire+.swift"; sourceTree = "<group>"; };
 		8E73428B2B1537A20062E845 /* HTTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPResponse.swift; sourceTree = "<group>"; };
 		8E73428D2B15391A0062E845 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		8E73428F2B1543380062E845 /* CLI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLI.swift; sourceTree = "<group>"; };
 		8EC3B2EB2B11679900E73878 /* functional-test.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "functional-test.xctestplan"; sourceTree = "<group>"; };
-		8EC3B2F42B151BD200E73878 /* HTTPServerCriollo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPServerCriollo.swift; sourceTree = "<group>"; };
 		8EC3B2F62B151D0F00E73878 /* HTTPServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPServer.swift; sourceTree = "<group>"; };
 		8EC3B2F82B151E5C00E73878 /* HealthCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCheck.swift; sourceTree = "<group>"; };
 		8EC3B2FA2B15245800E73878 /* LocalDirectory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectory.swift; sourceTree = "<group>"; };
@@ -82,7 +88,8 @@
 			files = (
 				8E7342892B1527630062E845 /* Alamofire in Frameworks */,
 				8E2DA0C12B102F1600FC44B9 /* LoggerFactory in Frameworks */,
-				8EC3B2F02B15171500E73878 /* Criollo in Frameworks */,
+				8E5B91802B1944880034E877 /* FlyingFox in Frameworks */,
+				8E5B91822B1944880034E877 /* FlyingSocks in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,6 +108,7 @@
 			children = (
 				8E347D562B111DAE00DA30F5 /* settings.xctestplan */,
 				8EC3B2EB2B11679900E73878 /* functional-test.xctestplan */,
+				8E5B91852B1945540034E877 /* http-server-test.xctestplan */,
 			);
 			path = TestPlans;
 			sourceTree = "<group>";
@@ -149,6 +157,7 @@
 			children = (
 				8E4728682B0ECBAE00A265E7 /* DiskGroupSwitcherTests.swift */,
 				8E347D532B111D5300DA30F5 /* SettingsTests.swift */,
+				8E5B91832B1944CC0034E877 /* HTTPServerTests.swift */,
 			);
 			path = DiskGroupSwitcherTests;
 			sourceTree = "<group>";
@@ -180,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				8E73428B2B1537A20062E845 /* HTTPResponse.swift */,
+				8E5B91882B1976BE0034E877 /* Alamofire+.swift */,
 			);
 			path = HTTPClient;
 			sourceTree = "<group>";
@@ -196,9 +206,9 @@
 		8EC3B2F32B151BAB00E73878 /* HTTPServer */ = {
 			isa = PBXGroup;
 			children = (
-				8EC3B2F42B151BD200E73878 /* HTTPServerCriollo.swift */,
 				8EC3B2F62B151D0F00E73878 /* HTTPServer.swift */,
 				8EC3B2F82B151E5C00E73878 /* HealthCheck.swift */,
+				8E5B91862B19466D0034E877 /* HTTPServerFlyingFox.swift */,
 			);
 			path = HTTPServer;
 			sourceTree = "<group>";
@@ -221,8 +231,9 @@
 			name = DiskGroupSwitcher;
 			packageProductDependencies = (
 				8E2DA0C02B102F1600FC44B9 /* LoggerFactory */,
-				8EC3B2EF2B15171500E73878 /* Criollo */,
 				8E7342882B1527630062E845 /* Alamofire */,
+				8E5B917F2B1944880034E877 /* FlyingFox */,
+				8E5B91812B1944880034E877 /* FlyingSocks */,
 			);
 			productName = DiskGroupSwitcher;
 			productReference = 8E4728532B0ECBAC00A265E7 /* DiskGroupSwitcher.app */;
@@ -276,8 +287,8 @@
 			mainGroup = 8E47284A2B0ECBAC00A265E7;
 			packageReferences = (
 				8E2DA0BF2B102F1600FC44B9 /* XCRemoteSwiftPackageReference "LoggerFactory" */,
-				8EC3B2EE2B15171500E73878 /* XCRemoteSwiftPackageReference "Criollo" */,
 				8E7342872B1527630062E845 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				8E5B917E2B1944880034E877 /* XCRemoteSwiftPackageReference "FlyingFox" */,
 			);
 			productRefGroup = 8E4728542B0ECBAC00A265E7 /* Products */;
 			projectDirPath = "";
@@ -316,12 +327,12 @@
 			files = (
 				8EC3B2F72B151D0F00E73878 /* HTTPServer.swift in Sources */,
 				8E4728832B0ECC5600A265E7 /* LoadableView.swift in Sources */,
-				8EC3B2F52B151BD200E73878 /* HTTPServerCriollo.swift in Sources */,
 				8E347D522B111D2300DA30F5 /* Extensions.swift in Sources */,
 				8E347D502B111CE000DA30F5 /* SwiftJSON.swift in Sources */,
 				8E4728872B0F980600A265E7 /* MainView.swift in Sources */,
 				8EC3B2FB2B15245800E73878 /* LocalDirectory.swift in Sources */,
 				8E7342902B1543380062E845 /* CLI.swift in Sources */,
+				8E5B91892B1976BE0034E877 /* Alamofire+.swift in Sources */,
 				8E4728592B0ECBAC00A265E7 /* ViewController.swift in Sources */,
 				8E347D4E2B11108500DA30F5 /* Servers.swift in Sources */,
 				8EC3B2F92B151E5C00E73878 /* HealthCheck.swift in Sources */,
@@ -330,6 +341,7 @@
 				8E73428E2B15391A0062E845 /* Defaults.swift in Sources */,
 				8E73428C2B1537A20062E845 /* HTTPResponse.swift in Sources */,
 				8E47288B2B0FA4AA00A265E7 /* StackView.swift in Sources */,
+				8E5B91872B19466D0034E877 /* HTTPServerFlyingFox.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +351,7 @@
 			files = (
 				8E347D542B111D5300DA30F5 /* SettingsTests.swift in Sources */,
 				8E4728692B0ECBAE00A265E7 /* DiskGroupSwitcherTests.swift in Sources */,
+				8E5B91842B1944CC0034E877 /* HTTPServerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,20 +636,20 @@
 				minimumVersion = 1.1.1;
 			};
 		};
+		8E5B917E2B1944880034E877 /* XCRemoteSwiftPackageReference "FlyingFox" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/swhitty/FlyingFox.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.13.0;
+			};
+		};
 		8E7342872B1527630062E845 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.8.1;
-			};
-		};
-		8EC3B2EE2B15171500E73878 /* XCRemoteSwiftPackageReference "Criollo" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/thecatalinstan/Criollo.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -647,15 +660,20 @@
 			package = 8E2DA0BF2B102F1600FC44B9 /* XCRemoteSwiftPackageReference "LoggerFactory" */;
 			productName = LoggerFactory;
 		};
+		8E5B917F2B1944880034E877 /* FlyingFox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E5B917E2B1944880034E877 /* XCRemoteSwiftPackageReference "FlyingFox" */;
+			productName = FlyingFox;
+		};
+		8E5B91812B1944880034E877 /* FlyingSocks */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E5B917E2B1944880034E877 /* XCRemoteSwiftPackageReference "FlyingFox" */;
+			productName = FlyingSocks;
+		};
 		8E7342882B1527630062E845 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8E7342872B1527630062E845 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		8EC3B2EF2B15171500E73878 /* Criollo */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8EC3B2EE2B15171500E73878 /* XCRemoteSwiftPackageReference "Criollo" */;
-			productName = Criollo;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

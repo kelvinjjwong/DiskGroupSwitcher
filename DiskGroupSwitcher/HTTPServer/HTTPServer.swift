@@ -14,17 +14,18 @@ public protocol HTTPServerProtocol {
 
 public enum HTTPServerEngine {
     case Criollo
+    case FlyingFox
 }
 
 public class HTTPServer : HTTPServerProtocol {
     
     private var impl:HTTPServerProtocol
     
-    public static let `default` = HTTPServer(.Criollo)
+    public static let `default` = HTTPServer(.FlyingFox)
     
     private init(_ engine:HTTPServerEngine) {
-        if engine == .Criollo {
-            self.impl = HTTPServerCriollo()
+        if engine == .FlyingFox {
+            self.impl = HTTPServerFlyingFox()
         }else{
             fatalError("Unsupported init parameter.")
         }

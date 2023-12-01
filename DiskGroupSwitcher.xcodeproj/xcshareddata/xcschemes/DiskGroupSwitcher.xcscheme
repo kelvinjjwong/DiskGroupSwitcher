@@ -35,6 +35,9 @@
          <TestPlanReference
             reference = "container:TestPlans/functional-test.xctestplan">
          </TestPlanReference>
+         <TestPlanReference
+            reference = "container:TestPlans/http-server-test.xctestplan">
+         </TestPlanReference>
       </TestPlans>
       <Testables>
          <TestableReference

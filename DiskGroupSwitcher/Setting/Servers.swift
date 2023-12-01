@@ -12,6 +12,7 @@ public class Disk : Codable {
     var volume:String = ""
     var online:Bool = false
     var softlink:String = ""
+    var linked:Bool = false
     
     public init() {}
     
@@ -263,6 +264,23 @@ public class Servers {
                 for disk in server.hddGroup.disks {
                     if disk.volume == volume {
                         disk.online = state
+                    }
+                }
+            }
+        }
+    }
+    
+    public func updateSoftlinkStatus(hostname:String, volume:String, state:Bool) {
+        for server in servers {
+            if server.hostname == hostname {
+                for disk in server.ssdGroup.disks {
+                    if disk.volume == volume {
+                        disk.linked = state
+                    }
+                }
+                for disk in server.hddGroup.disks {
+                    if disk.volume == volume {
+                        disk.linked = state
                     }
                 }
             }

@@ -13,7 +13,6 @@ class MainView: NSView, LoadableView {
     
     let logger = LoggerFactory.get(category: "UI", subCategory: "MainView")
     
-    @IBOutlet weak var lblMessage: NSTextField!
     @IBOutlet weak var cmbServer: NSComboBox!
     @IBOutlet weak var lblServerStatus: NSTextField!
     @IBOutlet weak var btnSwitch: NSSegmentedControl!
@@ -40,6 +39,8 @@ class MainView: NSView, LoadableView {
     
     @IBOutlet weak var tblSSD: NSTableView!
     @IBOutlet weak var tblHDD: NSTableView!
+    
+    private var selected_hostname = ""
     
     var ssdTableController : DictionaryTableViewController!
     var hddTableController : DictionaryTableViewController!
@@ -84,24 +85,25 @@ class MainView: NSView, LoadableView {
             
             self.inited = true
             
-            cmbServer.removeAllItems()
-            for hostname in Servers.stored.hostnames() {
-                // add hostname to combobox
-                cmbServer.addItem(withObjectValue: hostname)
-            }
+            self.refreshServerList()
             cmbServer.selectItem(at: 0)
-            
-            let server = Servers.stored.getServer(index: cmbServer.indexOfSelectedItem)
-            
-            self.txtSSDName.stringValue = server.ssdGroup.name
-            self.txtHDDName.stringValue = server.hddGroup.name
-            
-            self.loadSSDTable(data: server.getSsdDisks())
-            self.loadHDDTable(data: server.getHddDisks())
-            
-            self.lblMessage.stringValue = "online"
-            
+            self.reloadDiskGroups()
         }
+        
+    }
+    
+    func reloadDiskGroups() {
+        
+        let server = Servers.stored.getServer(index: cmbServer.indexOfSelectedItem)
+        
+        self.txtSSDName.stringValue = server.ssdGroup.name
+        self.txtHDDName.stringValue = server.hddGroup.name
+        
+        self.loadSSDTable(data: server.getSsdDisks())
+        self.loadHDDTable(data: server.getHddDisks())
+        
+        self.lblServerStatus.stringValue = "offline"
+        self.lblServerStatus.textColor = NSColor(hex: "7F7F7F")
         
     }
     
@@ -135,7 +137,8 @@ class MainView: NSView, LoadableView {
             if self.isOpened {
                 DispatchQueue.main.async {
                     let server = Servers.stored.getServer(index: self.cmbServer.indexOfSelectedItem)
-                    AF.request("http://\(server.hostname):\(Defaults.get.httpPort())/").responseString { response in
+                    AF.request("http://\(server.hostname):\(Defaults.get.httpPort())/").validate(statusCode: 200..<300).responseString { response in
+                        
                         if let responseText = response.value, let _ = HealthCheck.fromJSON(responseText) {
                             self.lblServerStatus.stringValue = "online"
                             self.lblServerStatus.textColor = NSColor(hex: "00FF00")
@@ -156,33 +159,95 @@ class MainView: NSView, LoadableView {
             }
         })
         
+        let timer6 = Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block:{_ in
+            if self.isOpened {
+                DispatchQueue.main.async {
+                    let hostname = self.cmbServer.objectValueOfSelectedItem as! String
+                    if hostname != self.selected_hostname {
+                        // changed
+                        self.selected_hostname = hostname
+                        self.reloadDiskGroups()
+                    }
+                }
+            }
+        })
+        
+        let timer7 = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block:{_ in
+            if self.isOpened {
+                DispatchQueue.main.async {
+                    self.toggleSoftlinkStatus()
+                }
+            }
+        })
+        
         timer1.fire()
         timer2.fire()
         timer3.fire()
         timer4.fire()
         timer5.fire()
+        timer6.fire()
+        timer7.fire()
         RunLoop.current.add(timer1, forMode: .common)
         RunLoop.current.add(timer2, forMode: .common)
         RunLoop.current.add(timer3, forMode: .common)
         RunLoop.current.add(timer4, forMode: .common)
         RunLoop.current.add(timer5, forMode: .common)
+        RunLoop.current.add(timer6, forMode: .common)
+        RunLoop.current.add(timer7, forMode: .common)
         self.logger.log("Scheduler started.")
+    }
+    
+    func updateDiskStatus() {
+        self.logger.log("Getting status of volumes ...")
+        let server = Servers.stored.getServer(index: self.cmbServer.indexOfSelectedItem)
+        for disk in server.ssdGroup.disks {
+            self.updateDiskStatus(server: server, disk: disk)
+        }
+        for disk in server.hddGroup.disks {
+            self.updateDiskStatus(server: server, disk: disk)
+        }
     }
     
     func updateDiskStatus(server: Server, disk: Disk) {
         AF.request("http://\(server.hostname):\(Defaults.get.httpPort())/status/\(disk.volume)").responseString { response in
-            if let responseText = response.value, let resp = HTTPResponse.fromJSON(responseText) {
+            if let responseText = response.value, let resp = MountedResponse.fromJSON(responseText) {
                 Servers.stored.updateDiskStatus(hostname: server.hostname, volume: disk.volume, state: resp.mounted)
             }
         }
     }
     
     func updateSoftlinkStatus() {
+        self.logger.log("Getting link status of volumes ...")
+        let server = Servers.stored.getServer(index: self.cmbServer.indexOfSelectedItem)
+        for disk in server.ssdGroup.disks {
+            self.updateSoftlinkStatus(server: server, disk: disk)
+        }
+        for disk in server.hddGroup.disks {
+            self.updateSoftlinkStatus(server: server, disk: disk)
+        }
+    }
+    
+    func updateSoftlinkStatus(server:Server, disk: Disk){
+        let jsonEncoder = JSONEncoder()
+        do {
+            let jsonData = try jsonEncoder.encode(["volume": disk.volume, "softlink": disk.softlink])
+            if let json = String(data: jsonData, encoding: String.Encoding.utf8) {
+                
+                AF.request(json.post(url: "http://\(server.hostname):\(Defaults.get.httpPort())/linkstatus")).responseString { response in
+                    if let responseText = response.value, let resp = LinkedResponse.fromJSON(responseText) {
+                        Servers.stored.updateSoftlinkStatus(hostname: server.hostname, volume: disk.volume, state: resp.linked)
+                    }
+                }
+            }
+        }catch {}
+    }
+    
+    func toggleSoftlinkStatus() {
         let server = Servers.stored.getServer(index: self.cmbServer.indexOfSelectedItem)
         DispatchQueue.global().async {
             
             let arraySSD = server.ssdGroup.disks.map { disk in
-                return disk.isLinked()
+                return disk.linked
             }
             DispatchQueue.main.async {
                 self.lblSSDLinked.isHidden = arraySSD.contains(false)
@@ -192,7 +257,7 @@ class MainView: NSView, LoadableView {
             }
             
             let arrayHDD = server.hddGroup.disks.map { disk in
-                return disk.isLinked()
+                return disk.linked
             }
             DispatchQueue.main.async {
                 self.lblHDDLinked.isHidden = arrayHDD.contains(false)
@@ -206,17 +271,6 @@ class MainView: NSView, LoadableView {
             }
         }
         
-    }
-    
-    func updateDiskStatus() {
-        self.logger.log("Getting status of volumes ...")
-        let server = Servers.stored.getServer(index: self.cmbServer.indexOfSelectedItem)
-        for disk in server.ssdGroup.disks {
-            self.updateDiskStatus(server: server, disk: disk)
-        }
-        for disk in server.hddGroup.disks {
-            self.updateDiskStatus(server: server, disk: disk)
-        }
     }
     
     func refreshTables() {
@@ -275,6 +329,8 @@ class MainView: NSView, LoadableView {
     func onClose() {
         self.isOpened = false
         self.logger.log(.trace, "menu close")
+        self.txtServer.isHidden = true
+        self.btnSaveServer.isHidden = true
         
     }
     
@@ -291,12 +347,10 @@ class MainView: NSView, LoadableView {
     
     @IBAction func onToggleSSDClicked(_ sender: NSSegmentedControl) {
         if sender.selectedSegment == 0 { // selected ON
-            print(0)
             CLI.get.turnOn(siriComponent: self.txtSSDName.stringValue)
             
             
         }else{ // selected OFF
-            print(1)
             let server = Servers.stored.getServer(index: self.cmbServer.indexOfSelectedItem)
             let siriComponent = self.txtSSDName.stringValue
             DispatchQueue.global().async {
@@ -336,36 +390,71 @@ class MainView: NSView, LoadableView {
         }
     }
     
+    // todo: change to HTTP API
     @IBAction func onSwitchClicked(_ sender: NSSegmentedControl) {
         let server = Servers.stored.getServer(index: self.cmbServer.indexOfSelectedItem)
+        struct R: Encodable {
+            let volume: String
+            let softlink: String
+            let group: String
+        }
+        var array:[R] = []
+        for disk in server.ssdGroup.disks {
+            array.append(R(volume: disk.volume, softlink: disk.softlink, group: "ssd"))
+        }
+        for disk in server.hddGroup.disks {
+            array.append(R(volume: disk.volume, softlink: disk.softlink, group: "hdd"))
+        }
+        
         if sender.selectedSegment == 0 { // selected SSD
-            for disk in server.hddGroup.disks {
-                disk.unlink()
-            }
-            for disk in server.ssdGroup.disks {
-                disk.unlink()
-            }
-            for disk in server.ssdGroup.disks {
-                disk.link()
-            }
+            
+            let jsonEncoder = JSONEncoder()
+            do {
+                let jsonData = try jsonEncoder.encode(array)
+                if let json = String(data: jsonData, encoding: String.Encoding.utf8) {
+                    
+                    self.logger.log("calling http://\(server.hostname):\(Defaults.get.httpPort())/link/ssd")
+                    self.logger.log(json)
+                    AF.request(json.post(url: "http://\(server.hostname):\(Defaults.get.httpPort())/link/ssd")).responseString { response in
+                        if let responseText = response.value, let resp = GenericResponse.fromJSON(responseText) {
+                            print(resp)
+                        }
+                    }
+                }
+            }catch{}
         }else if sender.selectedSegment == 1 { // selected none
-            for disk in server.hddGroup.disks {
-                disk.unlink()
-            }
-            for disk in server.ssdGroup.disks {
-                disk.unlink()
-            }
+            
+            let jsonEncoder = JSONEncoder()
+            do {
+                let jsonData = try jsonEncoder.encode(array)
+                if let json = String(data: jsonData, encoding: String.Encoding.utf8) {
+                    
+                    self.logger.log("calling http://\(server.hostname):\(Defaults.get.httpPort())/unlink/all")
+                    self.logger.log(json)
+                    AF.request(json.post(url: "http://\(server.hostname):\(Defaults.get.httpPort())/unlink/all")).responseString { response in
+                        if let responseText = response.value, let resp = GenericResponse.fromJSON(responseText) {
+                            print(resp)
+                        }
+                    }
+                }
+            }catch{}
             
         }else if sender.selectedSegment == 2 { // selected HDD
-            for disk in server.hddGroup.disks {
-                disk.unlink()
-            }
-            for disk in server.ssdGroup.disks {
-                disk.unlink()
-            }
-            for disk in server.hddGroup.disks {
-                disk.link()
-            }
+            
+            let jsonEncoder = JSONEncoder()
+            do {
+                let jsonData = try jsonEncoder.encode(array)
+                if let json = String(data: jsonData, encoding: String.Encoding.utf8) {
+                    
+                    self.logger.log("calling http://\(server.hostname):\(Defaults.get.httpPort())/link/hdd")
+                    self.logger.log(json)
+                    AF.request(json.post(url: "http://\(server.hostname):\(Defaults.get.httpPort())/link/hdd")).responseString { response in
+                        if let responseText = response.value, let resp = GenericResponse.fromJSON(responseText) {
+                            print(resp)
+                        }
+                    }
+                }
+            }catch{}
             
         }
     }
@@ -378,7 +467,7 @@ class MainView: NSView, LoadableView {
         Servers.stored.addSsdDisk(hostname: server.hostname, volume: volume, link: softlink)
         
         AF.request("http://\(server.hostname):\(Defaults.get.httpPort())/status/\(volume)").responseString { response in
-            if let responseText = response.value, let resp = HTTPResponse.fromJSON(responseText) {
+            if let responseText = response.value, let resp = MountedResponse.fromJSON(responseText) {
                 Servers.stored.updateDiskStatus(hostname: server.hostname, volume: volume, state: resp.mounted)
                 self.ssdTableController.load(server.getSsdDisks())
             }
@@ -393,7 +482,7 @@ class MainView: NSView, LoadableView {
         let server = Servers.stored.getServer(index: cmbServer.indexOfSelectedItem)
         Servers.stored.addHddDisk(hostname: server.hostname, volume: volume, link: softlink)
         AF.request("http://\(server.hostname):\(Defaults.get.httpPort())/status/\(volume)").responseString { response in
-            if let responseText = response.value, let resp = HTTPResponse.fromJSON(responseText) {
+            if let responseText = response.value, let resp = MountedResponse.fromJSON(responseText) {
                 Servers.stored.updateDiskStatus(hostname: server.hostname, volume: volume, state: resp.mounted)
                 self.hddTableController.load(server.getHddDisks())
             }
@@ -414,12 +503,54 @@ class MainView: NSView, LoadableView {
     }
     
     @IBAction func onAddServerClicked(_ sender: NSButton) {
+        let server = Servers.stored.getServer(index: cmbServer.indexOfSelectedItem)
+        self.txtServer.isHidden = false
+        self.txtServer.isEditable = true
+        self.txtServer.isBordered = true
+        self.txtServer.stringValue = "xxxx.local"
+        self.txtServer.textColor = NSColor(hex: "FFFFFF")
+        self.txtServer.backgroundColor = NSColor(hex: "222222")
+        self.btnSaveServer.isHidden = false
     }
     
     @IBAction func onRemoveServerClicked(_ sender: NSButton) {
+        let server = Servers.stored.getServer(index: cmbServer.indexOfSelectedItem)
+        self.txtServer.isBordered = false
+        self.txtServer.isHidden = false
+        self.txtServer.isEditable = false
+        self.txtServer.stringValue = "Confirm DELETE \(server.hostname) ?"
+        self.txtServer.textColor = NSColor(hex: "FF0000")
+        self.txtServer.backgroundColor = NSColor(hex: "222222")
+        self.btnSaveServer.isHidden = false
+    }
+    
+    func refreshServerList() {
+        self.lblServerStatus.stringValue = "offline"
+        self.lblServerStatus.textColor = NSColor(hex: "7F7F7F")
+        cmbServer.removeAllItems()
+        for hostname in Servers.stored.hostnames() {
+            // add hostname to combobox
+            cmbServer.addItem(withObjectValue: hostname)
+        }
     }
     
     @IBAction func onSaveServerClicked(_ sender: NSButton) {
+        let server_hostname = self.txtServer.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
+        if self.txtServer.isEditable {
+            Servers.stored.addServer(hostname: server_hostname, ssdGroupName: "SSD_TBC", hddGroupName: "HDD_TBC")
+            
+            self.refreshServerList()
+            cmbServer.selectItem(withObjectValue: server_hostname)
+            self.reloadDiskGroups()
+        }else{
+            Servers.stored.removeServer(hostname: server_hostname)
+            
+            self.refreshServerList()
+            cmbServer.selectItem(at: 0)
+            self.reloadDiskGroups()
+        }
+        self.txtServer.isHidden = true
+        self.btnSaveServer.isHidden = true
     }
     
     func prepareStubServers() {
