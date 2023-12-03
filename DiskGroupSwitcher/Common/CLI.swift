@@ -35,7 +35,7 @@ struct CLI {
             command.standardError = pipe
 //            command.currentDirectoryURL = URL(fileURLWithPath: "/Users/kelvinwong/Documents")
             command.launchPath = "/bin/bash"
-            command.arguments = ["-c", "/usr/local/bin/macism com.apple.keylayout.ABC; /usr/local/bin/cliclick kd:fn kp:f11 ku:fn kd:\(key) kp:space ku:\(key) w:250 t:\"turn on \(siriComponent)\" kp:return kd:fn kp:f11 ku:fn"]
+            command.arguments = ["--login", "-c", "macism com.apple.keylayout.ABC; cliclick kd:fn kp:f11 ku:fn kd:\(key) kp:space ku:\(key) w:250 t:\"turn on \(siriComponent)\" kp:return kd:fn kp:f11 ku:fn"]
             do {
                 self.logger.log(.trace, command.arguments![1])
                 try command.run()
@@ -102,7 +102,7 @@ struct CLI {
             command.standardOutput = pipe
             command.standardError = pipe
             command.launchPath = "/bin/bash"
-            command.arguments = ["-c", "/usr/local/bin/macism com.apple.keylayout.ABC; /usr/local/bin/cliclick kd:fn kp:f11 ku:fn kd:\(key) kp:space ku:\(key) w:250 t:\"is \(siriComponent) on?\" kp:return kd:fn kp:f11 ku:fn"]
+            command.arguments = ["--login", "-c", "macism com.apple.keylayout.ABC; cliclick kd:fn kp:f11 ku:fn kd:\(key) kp:space ku:\(key) w:250 t:\"is \(siriComponent) on?\" kp:return kd:fn kp:f11 ku:fn"]
             do {
                 try command.run()
             }catch{
@@ -125,7 +125,7 @@ struct CLI {
             command.standardOutput = pipe
             command.standardError = pipe
             command.launchPath = "/bin/bash"
-            command.arguments = ["-c", "for v in \(volumes.joined(separator: " ")); do diskutil umount force $v; done"]
+            command.arguments = ["--login", "-c", "for v in \(volumes.joined(separator: " ")); do diskutil umount force $v; done"]
             do {
                 try command.run()
             }catch{
@@ -150,7 +150,7 @@ struct CLI {
             command.standardOutput = pipe
             command.standardError = pipe
             command.launchPath = "/bin/bash"
-            command.arguments = ["-c", "mount | grep \"local,\" | grep -v \"nobrowse\" | grep -v \"read-only\" | egrep \"\(volumes.joined(separator: "|"))\""]
+            command.arguments = ["--login", "-c", "mount | grep \"local,\" | grep -v \"nobrowse\" | grep -v \"read-only\" | egrep \"\(volumes.joined(separator: "|"))\""]
             do {
                 try command.run()
             }catch{
