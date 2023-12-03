@@ -16,4 +16,13 @@ public class Defaults {
     public func httpPort() -> Int {
         return 18080
     }
+    
+    public func siriKey() -> String {
+        let key = UserDefaults.standard.get(key: "SIRIKEY", defaultValue: "fn")
+        return key
+    }
+    
+    public func saveSiriKey(key: String) {
+        UserDefaults.standard.setValue(key, forKey: "SIRIKEY")
+    }
 }

@@ -68,6 +68,7 @@
 		8E4728882B0F9D4800A265E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8E47288A2B0FA4AA00A265E7 /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
 		8E47288C2B0FB40200A265E7 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		8E55F5432B1CF57400E811CB /* Usage.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Usage.md; sourceTree = "<group>"; };
 		8E5B91832B1944CC0034E877 /* HTTPServerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPServerTests.swift; sourceTree = "<group>"; };
 		8E5B91852B1945540034E877 /* http-server-test.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "http-server-test.xctestplan"; sourceTree = "<group>"; };
 		8E5B91862B19466D0034E877 /* HTTPServerFlyingFox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPServerFlyingFox.swift; sourceTree = "<group>"; };
@@ -117,6 +118,8 @@
 		8E47284A2B0ECBAC00A265E7 = {
 			isa = PBXGroup;
 			children = (
+				8E55F5442B1CF57D00E811CB /* usage */,
+				8E55F5432B1CF57400E811CB /* Usage.md */,
 				8E5B918A2B19C0B00034E877 /* LICENSE */,
 				8E2DA0BE2B102D7C00FC44B9 /* Package.swift */,
 				8E47288C2B0FB40200A265E7 /* README.md */,
@@ -185,6 +188,13 @@
 				8E73428F2B1543380062E845 /* CLI.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		8E55F5442B1CF57D00E811CB /* usage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = usage;
 			sourceTree = "<group>";
 		};
 		8E73428A2B15378E0062E845 /* HTTPClient */ = {

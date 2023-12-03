@@ -97,7 +97,7 @@ extension UserDefaults {
     }
     
     func get(key:String, defaultValue:String) -> String {
-        return self.getString(key: key, defaultValue: "")
+        return self.getString(key: key, defaultValue: defaultValue)
     }
     
     func getString(key:String) -> String {

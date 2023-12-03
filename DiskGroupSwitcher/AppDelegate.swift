@@ -50,7 +50,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         if let item = firstMenuItem {
-            mainView = MainView(frame: NSRect(x: 0.0, y: 0.0, width: 500.0, height: 450.0))
+            mainView = MainView(frame: NSRect(x: 0.0, y: 0.0, width: 500.0, height: 540.0))
             item.view = mainView
         }
     }

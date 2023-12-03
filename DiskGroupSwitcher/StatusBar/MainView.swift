@@ -38,6 +38,7 @@ class MainView: NSView, LoadableView {
     @IBOutlet weak var txtServer: NSTextField!
     @IBOutlet weak var btnSyncSetting: NSButton!
     
+    @IBOutlet weak var btnKey: NSSegmentedControl!
     @IBOutlet weak var tblSSD: NSTableView!
     @IBOutlet weak var tblHDD: NSTableView!
     
@@ -56,6 +57,7 @@ class MainView: NSView, LoadableView {
         self.txtServer.isHidden = true
         self.btnSaveServer.isHidden = true
         
+        self.setSiriKey()
         self.initData()
         self.startScheduler()
     }
@@ -575,6 +577,7 @@ class MainView: NSView, LoadableView {
                     let servers = Servers.stored.fromJSON(responseText)
                     self.logger.log("contains \(servers.count) servers")
                     Servers.stored.replaceServers(with: servers)
+                    Servers.stored.saveServers()
                     
                     self.refreshServerList()
                     self.cmbServer.selectItem(at: 0)
@@ -586,6 +589,44 @@ class MainView: NSView, LoadableView {
         self.txtServer.isHidden = true
         self.btnSaveServer.isHidden = true
     }
+    
+    
+    
+    private func setSiriKey() {
+        let siriKey = Defaults.get.siriKey()
+        if siriKey == "fn" {
+            self.btnKey.selectedSegment = 0
+        }else if siriKey == "control" {
+            self.btnKey.selectedSegment = 1
+        }else if siriKey == "option" {
+            self.btnKey.selectedSegment = 2
+        }else if siriKey == "command" {
+            self.btnKey.selectedSegment = 3
+        }else {
+            self.btnKey.selectedSegment = 0
+        }
+    }
+    
+    @IBAction func onFunctionKeyClicked(_ sender: NSSegmentedControl) {
+        if self.btnKey.selectedSegment == 0 {
+            Defaults.get.saveSiriKey(key: "fn")
+        }else if self.btnKey.selectedSegment == 1{
+            Defaults.get.saveSiriKey(key: "control")
+        }else if self.btnKey.selectedSegment == 2{
+            Defaults.get.saveSiriKey(key: "option")
+        }else if self.btnKey.selectedSegment == 3 {
+            Defaults.get.saveSiriKey(key: "command")
+        }else {
+            Defaults.get.saveSiriKey(key: "fn")
+        }
+    }
+    
+    @IBAction func onUsageClicked(_ sender: NSButton) {
+        if let url = URL(string: "https://github.com/kelvinjjwong/DiskGroupSwitcher/blob/master/Usage.md") {
+            NSWorkspace.shared.open(url)
+        }
+    }
+    
     
     func prepareStubServers() {
         
