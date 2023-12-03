@@ -36,6 +36,7 @@ class MainView: NSView, LoadableView {
     @IBOutlet weak var lblSSDLinked: NSTextField!
     @IBOutlet weak var lblHDDLinked: NSTextField!
     @IBOutlet weak var txtServer: NSTextField!
+    @IBOutlet weak var btnSyncSetting: NSButton!
     
     @IBOutlet weak var tblSSD: NSTableView!
     @IBOutlet weak var tblHDD: NSTableView!
@@ -505,13 +506,14 @@ class MainView: NSView, LoadableView {
     }
     
     @IBAction func onAddServerClicked(_ sender: NSButton) {
-        let server = Servers.stored.getServer(index: cmbServer.indexOfSelectedItem)
+        let _ = Servers.stored.getServer(index: cmbServer.indexOfSelectedItem)
         self.txtServer.isHidden = false
         self.txtServer.isEditable = true
         self.txtServer.isBordered = true
         self.txtServer.stringValue = "xxxx.local"
         self.txtServer.textColor = NSColor(hex: "FFFFFF")
         self.txtServer.backgroundColor = NSColor(hex: "222222")
+        self.txtServer.drawsBackground = true
         self.btnSaveServer.isHidden = false
     }
     
@@ -523,8 +525,22 @@ class MainView: NSView, LoadableView {
         self.txtServer.stringValue = "Confirm DELETE \(server.hostname) ?"
         self.txtServer.textColor = NSColor(hex: "FF0000")
         self.txtServer.backgroundColor = NSColor(hex: "222222")
+        self.txtServer.drawsBackground = false
         self.btnSaveServer.isHidden = false
     }
+    
+    @IBAction func onSyncSettingClicked(_ sender: NSButton) {
+        let server = Servers.stored.getServer(index: cmbServer.indexOfSelectedItem)
+        self.txtServer.isBordered = false
+        self.txtServer.isHidden = false
+        self.txtServer.isEditable = false
+        self.txtServer.stringValue = "Import from \(server.hostname) ?"
+        self.txtServer.textColor = NSColor(hex: "FF0000")
+        self.txtServer.backgroundColor = NSColor(hex: "222222")
+        self.txtServer.drawsBackground = false
+        self.btnSaveServer.isHidden = false
+    }
+    
     
     func refreshServerList() {
         self.lblServerStatus.stringValue = "offline"
@@ -544,12 +560,28 @@ class MainView: NSView, LoadableView {
             self.refreshServerList()
             cmbServer.selectItem(withObjectValue: server_hostname)
             self.reloadDiskGroups()
-        }else{
-            Servers.stored.removeServer(hostname: server_hostname)
+        }else if self.txtServer.stringValue.starts(with: "Confirm DELETE"){
+            Servers.stored.removeServer(hostname: Servers.stored.hostnames()[self.cmbServer.indexOfSelectedItem])
             
             self.refreshServerList()
             cmbServer.selectItem(at: 0)
             self.reloadDiskGroups()
+        }else if self.txtServer.stringValue.starts(with: "Import from") {
+            let hostname = Servers.stored.hostnames()[self.cmbServer.indexOfSelectedItem]
+            self.logger.log("import from \(hostname)")
+            AF.request("http://\(hostname):\(Defaults.get.httpPort())/setting").responseString { response in
+                if let responseText = response.value {
+                    self.logger.log(responseText)
+                    let servers = Servers.stored.fromJSON(responseText)
+                    self.logger.log("contains \(servers.count) servers")
+                    Servers.stored.replaceServers(with: servers)
+                    
+                    self.refreshServerList()
+                    self.cmbServer.selectItem(at: 0)
+                    self.reloadDiskGroups()
+                    
+                }
+            }
         }
         self.txtServer.isHidden = true
         self.btnSaveServer.isHidden = true
@@ -569,17 +601,7 @@ class MainView: NSView, LoadableView {
                                 Disk(volume: "Photo3", link: "/Users/plex/photo3")
                              ]))
         
-        
-        let server2 = Server(hostname: "photostation.local",
-                             ssd: DiskGroup(name: "Photo Fast", disks: [
-                                Disk(volume: "ImageStorageFast")
-                             ]),
-                             hdd: DiskGroup(name: "Photo HDD", disks: [
-                                Disk(volume: "ImageStorage")
-                             ]))
-        
         Servers.stored.addServer(server1)
-        Servers.stored.addServer(server2)
     }
     
 }

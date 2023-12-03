@@ -342,4 +342,8 @@ public class Servers {
             return []
         }
     }
+    
+    public func replaceServers(with servers:[Server]) {
+        self.servers = servers
+    }
 }

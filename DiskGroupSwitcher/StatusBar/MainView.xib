@@ -18,6 +18,7 @@
                 <outlet property="btnRemoveServer" destination="BLe-r8-Q9H" id="s8h-C3-nZQ"/>
                 <outlet property="btnSaveServer" destination="kVc-Kb-Wk6" id="VBO-og-4Gg"/>
                 <outlet property="btnSwitch" destination="Zqr-DJ-gWW" id="8zn-q2-R72"/>
+                <outlet property="btnSyncSetting" destination="XwM-6q-Ihw" id="flX-2H-WzZ"/>
                 <outlet property="btnToggleHDD" destination="iDS-Mu-ZZ5" id="5ab-em-n7S"/>
                 <outlet property="btnToggleSSD" destination="Pxk-mn-DYu" id="Cm7-sy-iwE"/>
                 <outlet property="cmbServer" destination="eor-Jx-88R" id="Gg3-Yh-Dac"/>
@@ -42,7 +43,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <comboBox focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eor-Jx-88R">
-                    <rect key="frame" x="125" y="404" width="279" height="23"/>
+                    <rect key="frame" x="148" y="404" width="256" height="23"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="oEo-sU-iac">
                         <font key="font" metaFont="system"/>
@@ -528,7 +529,7 @@
                     </connections>
                 </button>
                 <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zKk-qt-KZe">
-                    <rect key="frame" x="126" y="378" width="255" height="21"/>
+                    <rect key="frame" x="149" y="378" width="232" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="GOL-N8-IGl">
                         <font key="font" usesAppearanceFont="YES"/>
@@ -565,6 +566,17 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XwM-6q-Ihw">
+                    <rect key="frame" x="124" y="406" width="16" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSTouchBarDownloadTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MQb-Vi-sUA">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="onSyncSettingClicked:" target="-2" id="dmZ-Kt-Cte"/>
+                    </connections>
+                </button>
             </subviews>
             <point key="canvasLocation" x="22" y="189"/>
         </customView>
@@ -574,6 +586,7 @@
         <image name="NSMenuMixedStateTemplate" width="18" height="5"/>
         <image name="NSMenuOnStateTemplate" width="18" height="17"/>
         <image name="NSTouchBarComposeTemplate" width="21" height="21"/>
+        <image name="NSTouchBarDownloadTemplate" width="20" height="20"/>
         <image name="mac" width="48" height="48"/>
     </resources>
 </document>

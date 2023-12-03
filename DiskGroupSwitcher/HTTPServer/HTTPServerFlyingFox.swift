@@ -134,6 +134,11 @@ public class HTTPServerFlyingFox : HTTPServerProtocol {
                 }
             }
             
+            await server.appendRoute("GET /setting") { request in
+                let rtn = Servers.stored.toJSON().data()
+                return HTTPResponse(statusCode: .ok, body: rtn)
+            }
+            
             try await server.start()
         }
     }
