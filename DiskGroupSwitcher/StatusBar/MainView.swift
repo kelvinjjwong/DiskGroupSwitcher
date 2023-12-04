@@ -37,6 +37,7 @@ class MainView: NSView, LoadableView {
     @IBOutlet weak var lblHDDLinked: NSTextField!
     @IBOutlet weak var txtServer: NSTextField!
     @IBOutlet weak var btnSyncSetting: NSButton!
+    @IBOutlet weak var btnTestSiri: NSButton!
     
     @IBOutlet weak var btnKey: NSSegmentedControl!
     @IBOutlet weak var tblSSD: NSTableView!
@@ -625,6 +626,10 @@ class MainView: NSView, LoadableView {
         if let url = URL(string: "https://github.com/kelvinjjwong/DiskGroupSwitcher/blob/master/Usage.md") {
             NSWorkspace.shared.open(url)
         }
+    }
+    
+    @IBAction func onTestSiriClicked(_ sender: NSButton) {
+        CLI.get.talk("hello")
     }
     
     
