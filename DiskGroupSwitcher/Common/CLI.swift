@@ -27,6 +27,7 @@ struct CLI {
         if key == "command"{
             key = "cmd"
         }
+        InputManager.select("com.apple.keylayout.ABC")
         
         self.logger.log("turning on: \(siriComponent)")
             let pipe = Pipe()
@@ -35,7 +36,7 @@ struct CLI {
             command.standardError = pipe
 //            command.currentDirectoryURL = URL(fileURLWithPath: "/Users/kelvinwong/Documents")
             command.launchPath = "/bin/bash"
-            command.arguments = ["--login", "-c", "macism com.apple.keylayout.ABC; cliclick kd:fn kp:f11 ku:fn kd:\(key) kp:space ku:\(key) w:250 t:\"turn on \(siriComponent)\" kp:return kd:fn kp:f11 ku:fn"]
+            command.arguments = ["--login", "-c", "cliclick kd:fn kp:f11 ku:fn kd:\(key) kp:space ku:\(key) w:250 t:\"turn on \(siriComponent)\" kp:return kd:fn kp:f11 ku:fn"]
             do {
                 self.logger.log(.trace, command.arguments![1])
                 try command.run()
@@ -44,7 +45,7 @@ struct CLI {
                 self.logger.log(.error, error)
             }
             let data = pipe.fileHandleForReading.readDataToEndOfFile()
-            let string:String = String(data: data, encoding: String.Encoding.utf8)!
+            let _ = String(data: data, encoding: String.Encoding.utf8)!
             pipe.fileHandleForReading.closeFile()
 //            if string != "" {
 //                self.logger.log(string)
@@ -62,6 +63,7 @@ struct CLI {
         if key == "command"{
             key = "cmd"
         }
+        InputManager.select("com.apple.keylayout.ABC")
         self.logger.log("turning off: \(siriComponent)")
             let pipe = Pipe()
             let command = Process()
@@ -69,7 +71,7 @@ struct CLI {
             command.standardError = pipe
             command.currentDirectoryURL = URL(fileURLWithPath: "/Users")
             command.launchPath = "/bin/bash"
-            command.arguments = ["--login", "-c", "macism com.apple.keylayout.ABC; cliclick kd:fn kp:f11 ku:fn kd:\(key) kp:space ku:\(key) w:250 t:\"shut down \(siriComponent)\" kp:return kd:fn kp:f11 ku:fn"]
+            command.arguments = ["--login", "-c", "cliclick kd:fn kp:f11 ku:fn kd:\(key) kp:space ku:\(key) w:450 t:\"shut down \(siriComponent)\" kp:return kd:fn kp:f11 ku:fn"]
             do {
                 self.logger.log(.trace, command.arguments![1])
                 try command.run()
@@ -96,20 +98,21 @@ struct CLI {
         if key == "command"{
             key = "cmd"
         }
+        InputManager.select("com.apple.keylayout.ABC")
         let pipe = Pipe()
         autoreleasepool { () -> Void in
             let command = Process()
             command.standardOutput = pipe
             command.standardError = pipe
             command.launchPath = "/bin/bash"
-            command.arguments = ["--login", "-c", "macism com.apple.keylayout.ABC; cliclick kd:fn kp:f11 ku:fn kd:\(key) kp:space ku:\(key) w:250 t:\"is \(siriComponent) on?\" kp:return kd:fn kp:f11 ku:fn"]
+            command.arguments = ["--login", "-c", "cliclick kd:fn kp:f11 ku:fn kd:\(key) kp:space ku:\(key) w:450 t:\"is \(siriComponent) on?\" kp:return kd:fn kp:f11 ku:fn"]
             do {
                 try command.run()
             }catch{
                 self.logger.log(.error, error)
             }
             let data = pipe.fileHandleForReading.readDataToEndOfFile()
-            let string:String = String(data: data, encoding: String.Encoding.utf8)!
+            let _ = String(data: data, encoding: String.Encoding.utf8)!
             pipe.fileHandleForReading.closeFile()
 //            if string != "" {
 //                self.logger.log(string)
@@ -128,13 +131,14 @@ struct CLI {
         if key == "command"{
             key = "cmd"
         }
+        InputManager.select("com.apple.keylayout.ABC")
         let pipe = Pipe()
         autoreleasepool { () -> Void in
             let command = Process()
             command.standardOutput = pipe
             command.standardError = pipe
             command.launchPath = "/bin/bash"
-            command.arguments = ["--login", "-c", "macism com.apple.keylayout.ABC; cliclick kd:fn kp:f11 ku:fn kd:\(key) kp:space ku:\(key) w:250 t:\"\(str)\" kp:return kd:fn kp:f11 ku:fn"]
+            command.arguments = ["--login", "-c", "cliclick kd:fn kp:f11 ku:fn kd:\(key) kp:space ku:\(key) w:450 t:\"\(str)\" kp:return kd:fn kp:f11 ku:fn"]
             do {
                 try command.run()
             }catch{

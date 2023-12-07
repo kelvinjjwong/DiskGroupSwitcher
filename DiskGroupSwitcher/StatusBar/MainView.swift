@@ -357,14 +357,24 @@ class MainView: NSView, LoadableView {
         }else{ // selected OFF
             let server = Servers.stored.getServer(index: self.cmbServer.indexOfSelectedItem)
             let siriComponent = self.txtSSDName.stringValue
-            DispatchQueue.global().async {
-                let volumes = server.ssdGroup.volumes()
-                _ = CLI.get.umount(volumes: volumes)
-                var n = volumes.count
-                while(n > 0){
-                    let lines = CLI.get.listmount(volumes: volumes)
-                    n = lines.count
+            if server.ssdGroup.disks.contains(where: { disk in
+                return disk.online
+            }) {
+                DispatchQueue.global().async {
+                    let volumes = server.ssdGroup.volumes()
+                    _ = CLI.get.umount(volumes: volumes)
+                    var n = volumes.count
+                    while(n > 0){
+                        let lines = CLI.get.listmount(volumes: volumes)
+                        n = lines.count
+                    }
+                    DispatchQueue.main.async {
+                        self.logger.log("Asking Siri to shut down \(siriComponent)")
+                        CLI.get.turnOff(siriComponent: siriComponent)
+                    }
                 }
+            }else{
+                self.logger.log("Asking Siri to shut down \(siriComponent)")
                 CLI.get.turnOff(siriComponent: siriComponent)
             }
         }
@@ -376,19 +386,30 @@ class MainView: NSView, LoadableView {
         }else{ // selected OFF
             let server = Servers.stored.getServer(index: self.cmbServer.indexOfSelectedItem)
             let siriComponent = self.txtHDDName.stringValue
-            DispatchQueue.global().async {
-                let volumes = server.hddGroup.volumes()
-                _ = CLI.get.umount(volumes: volumes)
-                var n = volumes.count
-                let startTime = Date()
-                while(n > 0){
-                    let now = Date()
-                    if now.timeIntervalSince(startTime) > 3 {
-                        break
+            if server.ssdGroup.disks.contains(where: { disk in
+                return disk.online
+            }) {
+                DispatchQueue.global().async {
+                    let volumes = server.hddGroup.volumes()
+                    _ = CLI.get.umount(volumes: volumes)
+                    var n = volumes.count
+                    let startTime = Date()
+                    while(n > 0){
+                        let now = Date()
+                        if now.timeIntervalSince(startTime) > 3 {
+                            break
+                        }
+                        let lines = CLI.get.listmount(volumes: volumes)
+                        n = lines.count
                     }
-                    let lines = CLI.get.listmount(volumes: volumes)
-                    n = lines.count
+                    
+                    DispatchQueue.main.async {
+                        self.logger.log("Asking Siri to shut down \(siriComponent)")
+                        CLI.get.turnOff(siriComponent: siriComponent)
+                    }
                 }
+            }else{
+                self.logger.log("Asking Siri to shut down \(siriComponent)")
                 CLI.get.turnOff(siriComponent: siriComponent)
             }
         }

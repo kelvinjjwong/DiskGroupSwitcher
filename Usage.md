@@ -10,19 +10,12 @@
 
 ## 3. [Install Homebrew](https://brew.sh)
 
-## 4. Install macism
-
-```bash
-brew tap laishulu/macism
-brew install macism
-```
-
-## 5. Install cliclick
+## 4. Install cliclick
 
 ```bash
 brew install cliclick
 ```
 
-## 6. Allow applications to control your computer
+## 5. Allow applications to control your computer
 
 ![](usage/Usage_6_Allow_control_computer.png)

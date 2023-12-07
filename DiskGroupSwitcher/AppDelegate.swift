@@ -22,7 +22,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         LoggerFactory.append(logWriter: ConsoleLogger())
         LoggerFactory.append(logWriter: FileLogger())
         LoggerFactory.enable([.info, .error, .warning])
-        HTTPServer.default.start()
+        let checkOptPrompt = kAXTrustedCheckOptionPrompt.takeUnretainedValue() as NSString
+        let options = [checkOptPrompt: true]
+        let isAppTrusted = AXIsProcessTrustedWithOptions(options as CFDictionary?)
+        if(isAppTrusted == true) {
+            HTTPServer.default.start()
+        }else{
+            usleep(5000000)
+        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
