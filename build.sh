@@ -71,10 +71,16 @@ if [[ $? -eq 0 ]]; then
     xcodebuild -exportArchive -archivePath build/archive/${PROJ}.xcarchive -exportPath build/output -exportOptionsPlist build/config/export.plist
     
     if [[ $? -eq 0 ]] && [[ -d build/output/${PROJ}.app ]] && [[ -f build/output/${PROJ}.app/Contents/MacOS/${PROJ} ]]; then
-        ## copy package
+        ## get package ready
         rm -rf build/release/$BUILD_VERSION
         mkdir -p build/release/$BUILD_VERSION
         mv build/output/${PROJ}.app build/release/${BUILD_VERSION}/
+        
+        rm -rf /tmp/tmp.dmg
+        hdiutil create /tmp/tmp.dmg -ov -volname "${PROJ}" -fs HFS+ srcfolder build/release/${BUILD_VERSION}/
+        
+        hdiutil convert /tmp/tmp.dmg -format UDZO -o build/release/${BUILD_VERSION}/${PROJ}_${NEW_VERSION}_${BUILD_VERSION}.dmg
+        rm -rf build/release/${BUILD_VERSION}/${PROJ}.app
         
         ## git commit && push
         git status
@@ -92,6 +98,7 @@ if [[ $? -eq 0 ]]; then
             git branch $CURRENT_VERSION
             git checkout $CURRENT_VERSION
         fi
+        git add build/release/${BUILD_VERSION}/
         git commit -am "build version $CURRENT_VERSION"
         if [[ $? -eq 0 ]]; then
             git push --set-upstream origin $CURRENT_VERSION
