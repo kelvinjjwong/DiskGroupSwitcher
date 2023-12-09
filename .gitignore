@@ -28,4 +28,5 @@ Carthage/Build
 #build
 build/archive
 build/output
+build/release
 
