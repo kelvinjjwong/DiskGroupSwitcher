@@ -116,7 +116,7 @@ if [[ $? -eq 0 ]]; then
             GH=`which gh`
             if [[ "$GH" != "" ]]; then
                 gh pr status
-                gh pr create --title "$CURRENT_VERSION" --body "**Full Changelog**: https://github.com/kelvinjjwong/$PROJ/compare/$PREV_VERSION...$CURRENT_VERSION"
+                gh pr create --title "$CURRENT_VERSION" --body "**Full Changelog**: https://github.com/kelvinjjwong/$PROJ/compare/$PREV_VERSION...$CURRENT_VERSION **Package**: [${PROJ}_${NEW_VERSION}_${BUILD_VERSION}.dmg](https://raw.githubusercontent.com/kelvinjjwong/$PROJ/master/build/release/${BUILD_VERSION}/${PROJ}_${NEW_VERSION}_${BUILD_VERSION}.dmg)"
                 gh pr list
                 GH_PR=`gh pr list | tail -1 | tr '#' ' ' | awk -F' ' '{print $1}'`
                 gh pr merge $GH_PR -m
