@@ -79,66 +79,71 @@ if [[ $? -eq 0 ]]; then
         ls -l build/output/${PROJ}.app build/release/${BUILD_VERSION}/
         
         rm -rf /tmp/tmp.dmg
-        hdiutil create /tmp/tmp.dmg -ov -volname "${PROJ}" -fs HFS+ srcfolder build/release/${BUILD_VERSION}/
+        hdiutil create /tmp/tmp.dmg -ov -volname "${PROJ}" -fs HFS+ -srcfolder build/release/${BUILD_VERSION}/
         
         hdiutil convert /tmp/tmp.dmg -format UDZO -o build/release/${BUILD_VERSION}/${PROJ}_${NEW_VERSION}_${BUILD_VERSION}.dmg
         rm -rf build/release/${BUILD_VERSION}/${PROJ}.app
         
-        ## git commit && push
-        git status
-        GIT_BRANCH=`git status | grep "On branch" | head -1 | awk -F' ' '{print $NF}'`
-        CURRENT_VERSION="${NEW_VERSION}.${BUILD_VERSION}"
+        if [[ -f build/release/${BUILD_VERSION}/${PROJ}_${NEW_VERSION}_${BUILD_VERSION}.dmg ]]; then
         
-        EXIST_TAG=`git ls-remote --tags origin | tr '/' ' ' | awk -F' ' '{print $NF}' | grep $CURRENT_VERSION`
-        if [[ "$EXIST_TAG" != "" ]]; then
-            echo "$CURRENT_VERSION already exist in git repository. Aborted following build steps to avoid duplication."
-            echo
-            exit -1
-        fi
-        
-        if [[ "$GIT_BRANCH" != "$CURRENT_VERSION" ]]; then
-            git branch $CURRENT_VERSION
-            git checkout $CURRENT_VERSION
-        fi
-        git add build/release/${BUILD_VERSION}/
-        git commit -am "build version $CURRENT_VERSION"
-        if [[ $? -eq 0 ]]; then
-            git push --set-upstream origin $CURRENT_VERSION
-            if [[ $? -ne 0 ]]; then
-               exit -1
+            ## git commit && push
+            git status
+            GIT_BRANCH=`git status | grep "On branch" | head -1 | awk -F' ' '{print $NF}'`
+            CURRENT_VERSION="${NEW_VERSION}.${BUILD_VERSION}"
+            
+            EXIST_TAG=`git ls-remote --tags origin | tr '/' ' ' | awk -F' ' '{print $NF}' | grep $CURRENT_VERSION`
+            if [[ "$EXIST_TAG" != "" ]]; then
+                echo "$CURRENT_VERSION already exist in git repository. Aborted following build steps to avoid duplication."
+                echo
+                exit -1
             fi
-        fi
-        
-        # RELEASE
+            
+            if [[ "$GIT_BRANCH" != "$CURRENT_VERSION" ]]; then
+                git branch $CURRENT_VERSION
+                git checkout $CURRENT_VERSION
+            fi
+            git add build/release/${BUILD_VERSION}/
+            git commit -am "build version $CURRENT_VERSION"
+            if [[ $? -eq 0 ]]; then
+                git push --set-upstream origin $CURRENT_VERSION
+                if [[ $? -ne 0 ]]; then
+                   exit -1
+                fi
+            fi
+            
+            # RELEASE
 
-        GH=`which gh`
-        if [[ "$GH" != "" ]]; then
-            gh pr status
-            gh pr create --title "$CURRENT_VERSION" --body "**Full Changelog**: https://github.com/kelvinjjwong/$PROJ/compare/$PREV_VERSION...$CURRENT_VERSION"
-            gh pr list
-            GH_PR=`gh pr list | tail -1 | tr '#' ' ' | awk -F' ' '{print $1}'`
-            gh pr merge $GH_PR -m
-            if [[ $? -ne 0 ]]; then
-                exit -1
-            fi
-            gh pr status
-            git pull
-            git checkout master
-            git pull
-            gh release create $CURRENT_VERSION --generate-notes
-            if [[ $? -ne 0 ]]; then
-                exit -1
+            GH=`which gh`
+            if [[ "$GH" != "" ]]; then
+                gh pr status
+                gh pr create --title "$CURRENT_VERSION" --body "**Full Changelog**: https://github.com/kelvinjjwong/$PROJ/compare/$PREV_VERSION...$CURRENT_VERSION"
+                gh pr list
+                GH_PR=`gh pr list | tail -1 | tr '#' ' ' | awk -F' ' '{print $1}'`
+                gh pr merge $GH_PR -m
+                if [[ $? -ne 0 ]]; then
+                    exit -1
+                fi
+                gh pr status
+                git pull
+                git checkout master
+                git pull
+                gh release create $CURRENT_VERSION --generate-notes
+                if [[ $? -ne 0 ]]; then
+                    exit -1
+                fi
+            else
+                echo "If success, you can publish new release by tagging new version [$CURRENT_VERSION] in git repository"
+                echo "https://github.com/kelvinjjwong/$PROJ/releases"
+                echo "with auto markdown release note"
+                echo "**Full Changelog**: https://github.com/kelvinjjwong/$PROJ/compare/$PREV_VERSION...$CURRENT_VERSION"
+                echo
+                echo "OR install GitHub CLI to automate these steps:"
+                echo "brew install gh"
+                echo "https://cli.github.com"
+                echo
             fi
         else
-            echo "If success, you can publish new release by tagging new version [$CURRENT_VERSION] in git repository"
-            echo "https://github.com/kelvinjjwong/$PROJ/releases"
-            echo "with auto markdown release note"
-            echo "**Full Changelog**: https://github.com/kelvinjjwong/$PROJ/compare/$PREV_VERSION...$CURRENT_VERSION"
-            echo
-            echo "OR install GitHub CLI to automate these steps:"
-            echo "brew install gh"
-            echo "https://cli.github.com"
-            echo
+            echo "unable to create DMG at build/release/${BUILD_VERSION}/${PROJ}_${NEW_VERSION}_${BUILD_VERSION}.dmg"
         fi
     else
         echo "build macOS app bundle exit code: $?"
