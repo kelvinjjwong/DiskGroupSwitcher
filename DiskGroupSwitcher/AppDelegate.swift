@@ -13,6 +13,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBOutlet weak var menu: NSMenu?
     @IBOutlet weak var firstMenuItem: NSMenuItem?
+    @IBOutlet weak var quitMenuItem: NSMenuItem?
     
     var statusItem: NSStatusItem?
     var mainView: MainView?
@@ -54,6 +55,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let menu = menu {
             statusItem?.menu = menu
             menu.delegate = self
+        }
+        
+        if let quitMenuItem = self.quitMenuItem {
+            quitMenuItem.title = "Quit \(Bundle.main.appName) \(Bundle.main.appVersionLong).\(Bundle.main.appBuild)"
         }
         
         if let item = firstMenuItem {

@@ -37,6 +37,7 @@
                     <connections>
                         <outlet property="firstMenuItem" destination="LfE-Es-Qwf" id="LsP-bD-Wv3"/>
                         <outlet property="menu" destination="uQy-DD-JDr" id="3ND-of-h7t"/>
+                        <outlet property="quitMenuItem" destination="4sb-4s-VLi" id="Gxa-80-23h"/>
                     </connections>
                 </customObject>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
