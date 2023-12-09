@@ -102,7 +102,7 @@ if [[ $? -eq 0 ]]; then
                 git branch $CURRENT_VERSION
                 git checkout $CURRENT_VERSION
             fi
-            git add build/release/${BUILD_VERSION}/
+            #git add build/release/${BUILD_VERSION}/
             git commit -am "build version $CURRENT_VERSION"
             if [[ $? -eq 0 ]]; then
                 git push --set-upstream origin $CURRENT_VERSION
