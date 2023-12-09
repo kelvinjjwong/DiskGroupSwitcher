@@ -74,7 +74,9 @@ if [[ $? -eq 0 ]]; then
         ## get package ready
         rm -rf build/release/$BUILD_VERSION
         mkdir -p build/release/$BUILD_VERSION
-        mv build/output/${PROJ}.app build/release/${BUILD_VERSION}/
+        cp -R build/output/${PROJ}.app build/release/${BUILD_VERSION}/
+        
+        ls -l build/output/${PROJ}.app build/release/${BUILD_VERSION}/
         
         rm -rf /tmp/tmp.dmg
         hdiutil create /tmp/tmp.dmg -ov -volname "${PROJ}" -fs HFS+ srcfolder build/release/${BUILD_VERSION}/
